@@ -72,7 +72,7 @@ public class InputOutput {
 				if(keepFormat==true) {
 					fullText += temp+"\n";					
 				}else {
-					fullText += temp;
+					fullText += temp+" ";
 				}
 				
 			}
@@ -92,7 +92,7 @@ public class InputOutput {
 	
 	
 	/**
-	 * Read file to an array. extracts the data from a file(.txt) and stores every word separeted by a space
+	 * Read file to an array. extracts the data from a file(.txt) and stores every word separated by a space
 	 * 						  in a different position of an array
 	 *
 	 * @param filePath the file path
