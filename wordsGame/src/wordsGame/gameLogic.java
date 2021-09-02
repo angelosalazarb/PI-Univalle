@@ -64,7 +64,7 @@ public class gameLogic {
 	    }
 	    
 	    public String getUserName(String username) {
-	    	
+	    	userName = login.getUserInfo(username).get("username");
 	    	return  userName;
 	    }
 

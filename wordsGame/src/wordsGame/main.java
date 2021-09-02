@@ -27,7 +27,8 @@ public class main {
 		tryGameL.userInputWords("gallo");
 		juan1.getUserInfo("juan1");
 		System.out.println(tryGameL.getUserLevel("juan1"));
-		
+		System.out.println(tryGameL.getUserName("juan1"));
+
 	}
 
 }
