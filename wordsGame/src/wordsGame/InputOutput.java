@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class InputOutput.
+ * The Class InputOutput. this class reads and writes to .txt files
  */
 public class InputOutput {
 	
@@ -56,7 +56,7 @@ public class InputOutput {
 	 *
 	 * @param filePath the file path
 	 * @param keepFormat is true keeps the line breaks otherwise
-	 * 		   will return a string without the original line break
+	 * 		   will return a string without the original line breaks
 	 * @return a string that contains the data from the given file
 	 */
 	public String readFile( String filePath, boolean keepFormat ) {
