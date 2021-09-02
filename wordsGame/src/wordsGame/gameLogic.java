@@ -9,26 +9,43 @@ import java.util.ArrayList;
 
 public class gameLogic {
 
-	InputOutput getGameWords;
+	InputOutput inputOutput;
+	Login  login;
+	String userName;
 	public int lvl, correctWordsCounter, badWordsCounter;
 	private ArrayList<String> importedWords;
 	public ArrayList<String> correctWords, droppedWords, userWords;
 	
-	 public gameLogic() {
+	
+	public gameLogic() {
+
+        this.importedWords = new ArrayList<>();
+        this.correctWords = new ArrayList<>();
+        this.droppedWords = new ArrayList<>();
+        this.userWords = new ArrayList<>();
+
+        inputOutput = new InputOutput();
+        login = new Login();
+        lvl = 0;
+
+    }
+	
+	 public gameLogic(String usersPath) {
 
 	        this.importedWords = new ArrayList<>();
 	        this.correctWords = new ArrayList<>();
 	        this.droppedWords = new ArrayList<>();
 	        this.userWords = new ArrayList<>();
 
-	        getGameWords = new InputOutput();
-
+	        inputOutput = new InputOutput();
+	        login = new Login(usersPath);
+	        lvl = 0;
 
 	    }
 
 	    public void importWords(String filePath) {
 	    	
-	        importedWords = getGameWords.readFileToAnArray(filePath);
+	        importedWords = inputOutput.readFileToAnArray(filePath);
 	        System.out.println(importedWords.get(4));
 	    }
 	
@@ -38,4 +55,17 @@ public class gameLogic {
 	    	userWords.add(userWord);
 	    	System.out.println(userWords.get(userWords.size()-1));
 	    }
+	    
+	    public int  getUserLevel(String username) {
+	    	String strlvl;
+	    	strlvl = login.getUserInfo(username).get("level");
+	    	lvl = Integer.valueOf(strlvl);
+	    	return  lvl;
+	    }
+	    
+	    public String getUserName(String username) {
+	    	
+	    	return  userName;
+	    }
+
 }
