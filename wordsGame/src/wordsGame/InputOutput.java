@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class InputOutput. this class reads and writes to .txt files
+ * The Class InputOutput.
  */
 public class InputOutput {
 	
@@ -56,7 +56,7 @@ public class InputOutput {
 	 *
 	 * @param filePath the file path
 	 * @param keepFormat is true keeps the line breaks otherwise
-	 * 		   will return a string without the original line breaks
+	 * 		   will return a string without the original line break
 	 * @return a string that contains the data from the given file
 	 */
 	public String readFile( String filePath, boolean keepFormat ) {
@@ -72,7 +72,7 @@ public class InputOutput {
 				if(keepFormat==true) {
 					fullText += temp+"\n";					
 				}else {
-					fullText += temp+" ";
+					fullText += temp;
 				}
 				
 			}
@@ -92,7 +92,7 @@ public class InputOutput {
 	
 	
 	/**
-	 * Read file to an array. extracts the data from a file(.txt) and stores every word separated by a space
+	 * Read file to an array. extracts the data from a file(.txt) and stores every word separeted by a space
 	 * 						  in a different position of an array
 	 *
 	 * @param filePath the file path
