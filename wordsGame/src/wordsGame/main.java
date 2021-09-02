@@ -10,23 +10,17 @@ public class main {
 	
 		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";
 		
-		gameLogic tryGameL = new gameLogic("src/storageFiles/userData.txt");
-		
 		//InputOutput varInputOutput = new InputOutput();
 		//User user = new User("juan", "la vaca lola", 3);
 		//Login login = new Login(path2);
+		GameLogic gamelogic = new GameLogic( path2, path, "juan1" );
 		
-	
-		ArrayList<String> myvector = new ArrayList<String>();
+		//ArrayList<String> myvector = new ArrayList<String>();
 		
-		Login juan1 = new Login("src/storageFiles/userData.txt");
+		int num = gamelogic.determineWordsInPlay();
 		
-		tryGameL.importWords("src/storageFiles/listWords.txt");
-		tryGameL.userInputWords("PERRO");
-		tryGameL.userInputWords("GATO");
-		tryGameL.userInputWords("gallo");
-		juan1.getUserInfo("juan1");
-		System.out.println(tryGameL.getUserLevel("juan1"));
+		System.out.println();
+		
 		
 	}
 
