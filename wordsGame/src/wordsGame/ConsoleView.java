@@ -52,13 +52,15 @@ public class ConsoleView {
 			pregunta = input.nextLine();
 			
 			pregunta = pregunta.toUpperCase();
+				
+			gameLogic.addUserInputWord(pregunta);
 			
-			if( gameLogic.checkForMatchingWords(pregunta) ) {
-				
-				gameLogic.addUserInputWord(pregunta);
-				
+			if(!gameLogic.stillAlive()) {
+				System.out.println("Haz muerto");
+				break;
 			}
-			else if( pregunta.equals("STOP") ) {
+		
+			if( pregunta.equals("STOP") ) {
 				System.out.print("Desea iniciar la ronda/seria numero 2? y/n ");
 				pregunta2 = input.nextLine();
 				

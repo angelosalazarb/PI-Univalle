@@ -89,6 +89,9 @@ public class GameLogic {
     	if( checkForMatchingWords(userWord) ) {
     		correctWords.add(userWord);
     	}
+    	else {
+    		badWordsCounter++;
+    	}
     	
     }
     
@@ -130,10 +133,13 @@ public class GameLogic {
     
     public boolean checkForMatchingWords(String myWord) {
     	
-    	boolean flag=false;
+    	boolean flag= false;
     	
-    	for(String i : wordsInPlay) {
-    		flag = (i.equals(myWord))? true : false;
+    	for(int i=0 ; i < wordsInPlay.size();i++ ) {
+    		
+    		if(wordsInPlay.get(i).equals(myWord)) {
+    			flag = true;
+    		}
     	}
     	
     	return flag;
@@ -159,6 +165,34 @@ public class GameLogic {
     	userInputWords.clear();
     	fillWordsInPlay();
     	
+    }
+    public boolean stillAlive() {
+    	boolean flag;
+    	
+    	switch (level) {
+		case 1:
+			flag = ( badWordsCounter >= 3 )? false : true;
+			break;
+		case 2:
+			flag = ( badWordsCounter >= 4 )? false : true;
+			break;
+		case 3:
+			flag = ( badWordsCounter >= 6 )? false : true;
+			break;
+		case 4:
+			flag = ( badWordsCounter >= 7 )? false : true;
+			break;
+		case 5:
+			flag = ( badWordsCounter >= 9 )? false : true;
+			break;
+
+		default:
+			flag = false;
+			System.out.println("You died!");
+			break;
+		}
+    	
+    	return flag;
     }
     
     public boolean readyForNextLevel() {
