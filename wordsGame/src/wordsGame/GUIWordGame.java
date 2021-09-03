@@ -24,7 +24,7 @@ public class GUIWordGame extends JFrame {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setLocationRelativeTo(null);
 		
-		//panel incio
+		//panel inicio
 		panelInicio = new JPanel();
 		
 		panelInicio.setSize(1200,600);

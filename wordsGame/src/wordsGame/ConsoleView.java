@@ -94,7 +94,7 @@ public class ConsoleView {
 				
 				this.gameLogic = new GameLogic(usersDataFilePath, wordListFilePath, pregunta);
 				
-				System.out.println("######### GAAME STARTED #########");
+				System.out.println("######### GAME STARTED #########");
 				break;
 			}
 			else if( !login.userExist(pregunta) ) {
