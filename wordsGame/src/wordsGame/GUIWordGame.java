@@ -10,7 +10,8 @@ import javax.swing.JPanel;
 
 public class GUIWordGame extends JFrame {
 	private JPanel panelJuego, panelInicio, panelComoJugar;
-	private JLabel botonJugar,botonComoJugar, fondoInicio,fondoJuego, fondoComoJugar;
+	private JLabel botonJugar,botonComoJugar,botonAtras, botonSalir, botonJugar1;
+	private JLabel fondoInicio,fondoJuego, fondoComoJugar;
 	private JFrame ventana;
 	
 	public GUIWordGame() {
@@ -47,6 +48,7 @@ public class GUIWordGame extends JFrame {
 		botonJugar.setVisible(true);
 		panelInicio.add(botonJugar,0);
 		
+		
 		//Boton como jugar
 		botonComoJugar = new JLabel();
 		botonComoJugar.setSize(318,106);
@@ -69,14 +71,28 @@ public class GUIWordGame extends JFrame {
 		fondoComoJugar.setVisible(true);
 		panelComoJugar.add(fondoComoJugar,0);
 		
+		//boton salir
+		botonSalir = new JLabel();
+		botonSalir.setSize(318,106);
+		botonSalir.setLocation(110,450);
+		botonSalir.setIcon(new ImageIcon("src/imagenes/botonsalir1.png"));
+		botonSalir.setVisible(true);
+		panelComoJugar.add(botonSalir,0);
 		
+		//boton jugar de la pantalla de como jugar
+		botonJugar1 = new JLabel();
+		botonJugar1.setSize(212,116);
+		botonJugar1.setLocation(350,425);
+		botonJugar1.setIcon(new ImageIcon("src/imagenes/botonjugar1.png"));
+		botonJugar1.setVisible(true);
+		panelComoJugar.add(botonJugar1,0);
+				
 		//panel juego
 		panelJuego = new JPanel();				
 		panelJuego.setSize(1200,600);
 		panelJuego.setLocation(0,0);
 		panelJuego.setLayout(null);
-		
-		
+			
 		//fondo juego
 		fondoJuego = new JLabel();
 		fondoJuego.setSize(1200,600);
@@ -85,7 +101,15 @@ public class GUIWordGame extends JFrame {
 		fondoJuego.setVisible(true);
 		panelJuego.add(fondoJuego,0);
 		
+		//boton atras
+		botonAtras = new JLabel();
+		botonAtras.setSize(150,150);
+		botonAtras.setLocation(1055,0);
+		botonAtras.setIcon(new ImageIcon("src/imagenes/klipartz.com.png"));
+		botonAtras.setVisible(true);
+		panelJuego.add(botonAtras,0);
 		
+		//evento del boton jugar con click
 		botonJugar.addMouseListener(new MouseAdapter () {
 			public void mousePressed(MouseEvent e) {
 				panelInicio.setVisible(false);
@@ -93,12 +117,40 @@ public class GUIWordGame extends JFrame {
 				panelJuego.setVisible(true);
 			}
 		});
-		
+				
+		//evento del boton jugar con click
+		botonJugar1.addMouseListener(new MouseAdapter () {
+			public void mousePressed(MouseEvent e) {
+				panelComoJugar.setVisible(false);
+				ventana.add(panelJuego);
+				panelJuego.setVisible(true);
+			}
+		});
+			
+		//evento del boton como jugar con click
 		botonComoJugar.addMouseListener(new MouseAdapter () {
 			public void mousePressed(MouseEvent e) {
 				panelInicio.setVisible(false);
 				ventana.add(panelComoJugar);
 				panelComoJugar.setVisible(true);
+			}
+		});
+		
+		//evento del boton salir con click
+		botonSalir.addMouseListener(new MouseAdapter () {
+			public void mousePressed(MouseEvent e) {
+				panelComoJugar.setVisible(false);
+				ventana.add(panelInicio);
+				panelInicio.setVisible(true);
+			}
+		});
+		
+		//evento del boton atras con click
+		botonAtras.addMouseListener(new MouseAdapter () {
+			public void mousePressed(MouseEvent e) {
+				panelJuego.setVisible(false);
+				ventana.add(panelInicio);
+				panelInicio.setVisible(true);
 			}
 		});
 		
