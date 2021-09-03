@@ -10,17 +10,21 @@ public class main {
 	
 		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";
 		
-		gameLogic tryGameL = new gameLogic("src/storageFiles/userData.txt");
-		
 		//InputOutput varInputOutput = new InputOutput();
 		//User user = new User("juan", "la vaca lola", 3);
 		//Login login = new Login(path2);
+		//GameLogic gamelogic = new GameLogic( path2, path, "juan1" );
+		//ConsoleView consoleView = new ConsoleView(path2, path);
 		
-	
-		ArrayList<String> myvector = new ArrayList<String>();
+		//ArrayList<String> myvector = new ArrayList<String>();
 		
-		Login juan1 = new Login("src/storageFiles/userData.txt");
+		//consoleView.startGame();
 		
+		/*
+		int num = gamelogic.determineWordsInPlay();
+		gamelogic.fillWordsInPlay();
+		
+<<<<<<< HEAD
 		tryGameL.importWords("src/storageFiles/listWords.txt");
 		tryGameL.userInputWords("PERRO");
 		tryGameL.userInputWords("GATO");
@@ -29,6 +33,17 @@ public class main {
 		System.out.println(tryGameL.getUserLevel("juan1"));
 		System.out.println(tryGameL.getUserName("juan1"));
 
+=======
+		System.out.println( gamelogic.getUserLevel() );
+		System.out.println( gamelogic.getWordsInPlay() );
+		System.out.println( gamelogic.getImportedWords().size() );
+		System.out.println( gamelogic.getImportedWords().size() );
+		System.out.println( gamelogic.checkForMatchingWords("ALQUILER") );
+		gamelogic.addUserInputWord("ALQUILER");
+		System.out.println( gamelogic.getCorrectWords() );
+		*/
+		
+>>>>>>> 2369991216ef4f161cfbcfd47565300f72c2e81c
 	}
 
 }
