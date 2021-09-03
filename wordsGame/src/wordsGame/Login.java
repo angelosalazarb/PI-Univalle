@@ -158,9 +158,14 @@ public class Login {
 	 */
 	public void addNewUser(String username, String password, String filePath) {
 		
-		User user = new User(username, password, 1);
-		user.addToDataBase(filePath);
-		this.usersData.add(user);
+		if( userExist(username) ) {
+			System.out.println("This user: "+ username + " already exist.");
+		}
+		else {
+			User user = new User(username, password, 1);
+			user.addToDataBase(filePath);
+			this.usersData.add(user);
+		}
 	}
 	
 	
@@ -173,8 +178,16 @@ public class Login {
 	public HashMap<String, String> getUserInfo(String username){
 		
 		int index = userPositionInTheArray(username);
+		HashMap<String, String> map = new HashMap<String, String>();
 		
-		return this.usersData.get(index).getAllUserInfo();
+		try {
+			map = this.usersData.get(index).getAllUserInfo();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("ERROR! this username do NOT exist, plese create a new user.");
+		}
+				
+		return map;
 	}
 	
 	
