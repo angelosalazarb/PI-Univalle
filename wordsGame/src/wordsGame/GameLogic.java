@@ -7,7 +7,6 @@ package wordsGame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
 
 
@@ -99,6 +98,7 @@ public class GameLogic {
     	
     	if( checkForMatchingWords(userWord) ) {
     		correctWords.add(userWord);
+    		wordsInPlay.remove(userWord);
     	}
     	else {
     		badWordsCounter++;
@@ -155,17 +155,22 @@ public class GameLogic {
     	return flag;
     }
     
-    /*
-    public void playCorrespondingLevel() {
+    
+    public boolean memberOfCorrectWords(String myWord) {
     	
-    	fillWordsInPlay();
+    	boolean flag=false;
     	
-    }*/
+    	for( String i : this.correctWords ) {
+    		if( i.equals(myWord) ) {
+    			flag=true;
+    		}
+    	}
+    	
+    	return flag;
+    }
     
     
     public void nextLevel() {
-    	
-    	//level= (level>=5)? 5 : level++;
     	
     	if(level>5) {
     		setLevel(5);
@@ -178,11 +183,12 @@ public class GameLogic {
     	
     	correctWordsCounter=0;
     	badWordsCounter=0;
+    	importedWords.addAll( correctWords );
     	importedWords.addAll(wordsInPlay);
     	
     	round=1;
-    	wordsInPlay.clear();
     	correctWords.clear();
+    	wordsInPlay.clear();
     	userInputWords.clear();
     	fillWordsInPlay();
     	

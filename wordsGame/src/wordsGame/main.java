@@ -8,6 +8,12 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	
+		/**
+		 * System.out.println(gameLogic.getWordsInPlay().size());
+				System.out.println(  ((gameLogic.getUserLevel()+1)*4)  );
+				System.out.println(  gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4)   );
+		 */
+		
 		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";
 		
 		//InputOutput varInputOutput = new InputOutput();
@@ -18,8 +24,8 @@ public class main {
 		
 		consoleView.startGame();
 		
-		ArrayList<Integer> myvector = new ArrayList<>();
-		ArrayList<Integer> myvector2 = new ArrayList<>();
+		//ArrayList<Integer> myvector = new ArrayList<>();
+		//ArrayList<Integer> myvector2 = new ArrayList<>();
 		/*
 		myvector.add(1);
 		myvector.add(2);

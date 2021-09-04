@@ -56,16 +56,22 @@ public class ConsoleView {
 		
 		while (true) {
 			
-			boolean aux = gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4) ;
+			//boolean aux = gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4) ;
 			
 			System.out.print(" --> ");
 			pregunta = input.nextLine();
 			
 			pregunta = pregunta.toUpperCase();
 			
-			if( !pregunta.equals("STOP") ) {
+			if( gameLogic.memberOfCorrectWords(pregunta) ) {
+				System.out.println("This is a CORRECT word, you already imputed this word.");
+				System.out.println(" Please try anotherone: ");
+			}
+			else if( !pregunta.equals("STOP") ) {
 				gameLogic.addUserInputWord(pregunta);				
 			}
+			
+			
 			
 			if(!gameLogic.stillAlive()) {
 				
@@ -85,11 +91,13 @@ public class ConsoleView {
 				playCorrspondingLevel();				
 				break;
 			}
-			else if( gameLogic.readyForNextLevel()  &&  aux ) {
+			else if( gameLogic.readyForNextLevel()   ) {
 				
-				System.out.println("EXELENTE!! has ganado, vamos al siguiente nivel.");
-				System.out.println("");
-				break;
+				//if( gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4)  ) {					
+					System.out.println("EXELENTE!! has ganado, vamos al siguiente nivel.");
+					System.out.println("");
+					break;
+				//}
 			}
 			else if( pregunta.equals("STOP") ) {
 				
