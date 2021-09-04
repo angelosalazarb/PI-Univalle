@@ -1,5 +1,7 @@
 package wordsGame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -7,20 +9,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import utilities.GameFont;
-import utilities.GokuObject;
-import utilities.Titles;
+import javax.swing.Timer;
 
 public class GUIWordGame extends JFrame {
 	private JPanel panelJuego, panelInicio, panelComoJugar;
 	private JLabel botonJugar,botonComoJugar,botonAtras, botonSalir, botonJugar1;
-	private JLabel fondoInicio,fondoJuego, fondoComoJugar;
+	private JLabel fondoInicio,fondoJuego, fondoComoJugar, goku;
 	private JFrame ventana;
-	private GokuObject goku;
+	private Timer timer;
 	
 	public GUIWordGame() {
-		this.goku = new GokuObject("");
 		
 		//ventana
 		ventana = new JFrame("Words Game");
@@ -30,8 +28,9 @@ public class GUIWordGame extends JFrame {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setLocationRelativeTo(null);
 		
-		//panel inicio
+		//panel incio
 		panelInicio = new JPanel();
+		
 		panelInicio.setSize(1200,600);
 		panelInicio.setLocation(0,0);
 		panelInicio.setLayout(null);
@@ -97,10 +96,6 @@ public class GUIWordGame extends JFrame {
 		panelJuego.setSize(1200,600);
 		panelJuego.setLocation(0,0);
 		panelJuego.setLayout(null);
-		goku.setSize(300,300);
-		goku.setLocation(0,0);
-		goku.setVisible(true);
-		
 			
 		//fondo juego
 		fondoJuego = new JLabel();
@@ -108,11 +103,7 @@ public class GUIWordGame extends JFrame {
 		fondoJuego.setLocation(0,0);
 		fondoJuego.setIcon(new ImageIcon("src/imagenes/IjQ1.gif"));
 		fondoJuego.setVisible(true);
-		goku.setLocation(180,300);
-		goku.setText("NALGA");
 		panelJuego.add(fondoJuego,0);
-		panelJuego.add(goku,0);
-		
 		
 		//boton atras
 		botonAtras = new JLabel();
@@ -122,12 +113,25 @@ public class GUIWordGame extends JFrame {
 		botonAtras.setVisible(true);
 		panelJuego.add(botonAtras,0);
 		
+		
+		//goku
+		goku = new JLabel();
+		goku.setSize(468,415);		
+		goku.setLocation(1050,60);
+		goku.setIcon(new ImageIcon("src/imagenes/pngaaa.com-401694 (2).png"));
+		goku.setVisible(true);
+		panelJuego.add(goku,0); 
+		
+		
+		
 		//evento del boton jugar con click
 		botonJugar.addMouseListener(new MouseAdapter () {
+			
 			public void mousePressed(MouseEvent e) {
 				panelInicio.setVisible(false);
 				ventana.add(panelJuego);
 				panelJuego.setVisible(true);
+			     
 			}
 		});
 				
@@ -146,6 +150,7 @@ public class GUIWordGame extends JFrame {
 				panelInicio.setVisible(false);
 				ventana.add(panelComoJugar);
 				panelComoJugar.setVisible(true);
+				
 			}
 		});
 		
@@ -173,6 +178,10 @@ public class GUIWordGame extends JFrame {
 		ventana.add(panelInicio);
 		ventana.setVisible(true);
 			
+		
+	        
+	}
 			
-			}
+	
+
 }
