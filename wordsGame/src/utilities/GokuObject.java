@@ -33,7 +33,7 @@ public class GokuObject extends JPanel {
 		this.wordLabel = new JLabel(usedWord);
 		float size = 17;
 		wordLabel.setForeground(new Color(0,0,0));
-		wordLabel.setBounds(18,5, 350, 350);
+		wordLabel.setBounds(26,5, 350, 350);
 		wordLabel.setFont(pixeled.deriveFont(size));
 		cloud = new JLabel();
 		cloud.setIcon(new ImageIcon(GokuObject.class.getResource("/imagenes/gokuFlying.gif")));

@@ -108,8 +108,8 @@ public class GUIWordGame extends JFrame {
 		fondoJuego.setLocation(0,0);
 		fondoJuego.setIcon(new ImageIcon("src/imagenes/IjQ1.gif"));
 		fondoJuego.setVisible(true);
-		goku.setLocation(180,300);
-		goku.setText("NALGA");
+		goku.setLocation(600,150);
+		goku.setText("PRUEBA");
 		panelJuego.add(fondoJuego,0);
 		panelJuego.add(goku,0);
 		
