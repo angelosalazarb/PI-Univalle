@@ -7,6 +7,7 @@ package wordsGame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 
@@ -14,8 +15,8 @@ public class GameLogic {
 
 	private InputOutput inputOutput;
 	private Login  login;
-	private String userName;
-	private int level, correctWordsCounter, badWordsCounter;
+	private String userName, wordListFile, usersDataFile;
+	private int level, round,correctWordsCounter, badWordsCounter;
 	private ArrayList<String> importedWords, correctWords, wordsInPlay, userInputWords;
 	
 	
@@ -30,8 +31,11 @@ public class GameLogic {
         login = new Login();
         userName=null;
         level = 0;
+        round=1;
         correctWordsCounter=0;
         badWordsCounter=0;
+        wordListFile=null;
+        usersDataFile=null;
 
     }
 
@@ -49,8 +53,11 @@ public class GameLogic {
         
         this.userName = map.get("username");
         this.level =  Integer.valueOf( map.get("level") );
+        this.round = 1;
         this.correctWordsCounter=0;
         this.badWordsCounter=0;
+        this.wordListFile = wordsListFilePath;
+        this.usersDataFile= usersDataFilePath;
         
         importWords(wordsListFilePath);    
         
@@ -67,8 +74,11 @@ public class GameLogic {
         this.inputOutput = new InputOutput();        
         this.userName = null;
         this.level = 0;
+        this.round = 1;
         this.correctWordsCounter=0;
         this.badWordsCounter=0;
+        this.wordListFile = wordsListFilePath;
+        this.usersDataFile = usersDataFilePath;
         
         importWords(wordsListFilePath);
         
@@ -82,12 +92,16 @@ public class GameLogic {
         importedWords = inputOutput.readFileToAnArray(filePath);
     }
 
+    
     public void addUserInputWord(String userWord){
     	userWord = userWord.toUpperCase();
     	userInputWords.add(userWord);    	
     	
     	if( checkForMatchingWords(userWord) ) {
     		correctWords.add(userWord);
+    	}
+    	else {
+    		badWordsCounter++;
     	}
     	
     }
@@ -132,8 +146,10 @@ public class GameLogic {
     	
     	boolean flag=false;
     	
-    	for(String i : wordsInPlay) {
-    		flag = (i.equals(myWord))? true : false;
+    	for(int i=0; i<wordsInPlay.size(); i++ ) {
+    		if( wordsInPlay.get(i).equals(myWord) ) {
+    			flag=true;
+    		}
     	}
     	
     	return flag;
@@ -149,17 +165,59 @@ public class GameLogic {
     
     public void nextLevel() {
     	
-    	level= (level>=5)? 5 : level++;
+    	//level= (level>=5)? 5 : level++;
+    	
+    	if(level>5) {
+    		setLevel(5);
+    		level=5;
+    	}
+    	else if(level>0 && level<5) {
+    		setLevel(level+1);
+    		level++;
+    	}
+    	
     	correctWordsCounter=0;
     	badWordsCounter=0;
     	importedWords.addAll(wordsInPlay);
     	
+    	round=1;
     	wordsInPlay.clear();
     	correctWords.clear();
     	userInputWords.clear();
     	fillWordsInPlay();
     	
     }
+    
+    
+    public boolean stillAlive() {
+    	boolean flag;
+    	
+    	switch (level) {
+		case 1:
+			flag = ( badWordsCounter >= 3 )? false : true;
+			break;
+		case 2:
+			flag = ( badWordsCounter >= 4 )? false : true;
+			break;
+		case 3:
+			flag = ( badWordsCounter >= 6 )? false : true;
+			break;
+		case 4:
+			flag = ( badWordsCounter >= 7 )? false : true;
+			break;
+		case 5:
+			flag = ( badWordsCounter >= 9 )? false : true;
+			break;
+
+		default:
+			flag = false;
+			System.out.println("You died!");
+			break;
+		}
+    	
+    	return flag;
+    }
+    
     
     public boolean readyForNextLevel() {
     	
@@ -191,19 +249,66 @@ public class GameLogic {
     	return flag;
     }
     
-    
-    //ESTE METODO FAlTA POR TERMINAR
+  
     public void setSecondRound() {
     	
+    	round=2;
     	importedWords.addAll( wordsInPlay );
     	wordsInPlay.clear();
     	fillWordsInPlay();
     }
     
+    public boolean readyForSecondRound() {
+    	
+    	boolean flag;
+    	
+    	switch (level) {
+		case 1:
+			flag = ( correctWords.size() >= 4 )? true : false;
+			break;
+		case 2:
+			flag = ( correctWords.size() >= 6 )? true : false;
+			break;
+		case 3:
+			flag = ( correctWords.size() >= 8 )? true : false;
+			break;
+		case 4:
+			flag = ( correctWords.size() >= 10 )? true : false;
+			break;
+		case 5:
+			flag = ( correctWords.size() >= 12 )? true : false;
+			break;
+
+		default:
+			flag = false;
+			System.out.println("The level should be an Integer beetwen the interval [1,5]");
+			break;
+		}
+    	
+    	return flag;
+    }
     
-    public void setUserLevel(int newLevel) {
-		this.level= newLevel;
-	}
+    
+    public void setLevel( int newLevel ) {
+    	
+    	String newFileContent="";
+    	ArrayList<String> tempArray = inputOutput.readFileToAnArray(this.usersDataFile);
+    	
+    	for(int i=0; i<tempArray.size(); i++) {
+    		
+    		if( tempArray.get(i).equals(this.userName) ) {
+    			
+    			tempArray.set(i+1, Integer.toString(newLevel) );
+    		}
+    	}
+    	
+    	for(int i=0; i<tempArray.size(); i+=3) {
+    		
+    		newFileContent += tempArray.get(i) +" "+ tempArray.get(i+1) +" "+ tempArray.get(i+2) +"\n";
+    		inputOutput.writeFile(this.usersDataFile, newFileContent, false);
+    	}
+    	
+    }
     
     public int  getUserLevel() {
     	return  this.level;
@@ -225,6 +330,14 @@ public class GameLogic {
 			this.login = new Login(usersDataFilePath);	   
 	        HashMap<String, String> map = this.login.getUserInfo(username);	        
 	        this.userName = map.get("username");			
+	}
+		
+	public int getRound() {
+		return round;
+	}
+
+	public void setRound(int round) {
+		this.round = round;
 	}
 
 	public int getCorrectWordsCounter() {

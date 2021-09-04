@@ -14,11 +14,25 @@ public class main {
 		//User user = new User("juan", "la vaca lola", 3);
 		//Login login = new Login(path2);
 		//GameLogic gamelogic = new GameLogic( path2, path, "juan1" );
-		//ConsoleView consoleView = new ConsoleView(path2, path);
+		ConsoleView consoleView = new ConsoleView(path2, path);
 		
-		//ArrayList<String> myvector = new ArrayList<String>();
+		consoleView.startGame();
 		
-		//consoleView.startGame();
+		ArrayList<Integer> myvector = new ArrayList<>();
+		ArrayList<Integer> myvector2 = new ArrayList<>();
+		/*
+		myvector.add(1);
+		myvector.add(2);
+		myvector.add(3);
+		myvector2.add(20);
+		myvector2.add(21);
+		myvector2.add(22);
+		myvector.addAll(myvector2);
+		System.out.println(myvector);
+		System.out.println(myvector2);
+		/*
+		
+		
 		
 		/*
 		int num = gamelogic.determineWordsInPlay();
