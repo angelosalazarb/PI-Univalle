@@ -11,7 +11,7 @@ public class GameFont {
 
 	private static Font textFont() {
 		try {
-			pixeled = Font.createFont(Font.TRUETYPE_FONT, new File(GameFont.class.getResource("/fonts/pixeled.ttf").getFile()));
+			pixeled = Font.createFont(Font.TRUETYPE_FONT, new File(Titles.class.getResource("/fonts/pixeled.ttf").getFile()));
 			GraphicsEnvironment graphicE = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			graphicE.registerFont(pixeled);
 			

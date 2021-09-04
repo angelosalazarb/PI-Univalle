@@ -8,13 +8,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import utilities.GameFont;
+import utilities.GokuObject;
+import utilities.Titles;
+
 public class GUIWordGame extends JFrame {
 	private JPanel panelJuego, panelInicio, panelComoJugar;
 	private JLabel botonJugar,botonComoJugar,botonAtras, botonSalir, botonJugar1;
 	private JLabel fondoInicio,fondoJuego, fondoComoJugar;
 	private JFrame ventana;
+	private GokuObject goku;
 	
 	public GUIWordGame() {
+		this.goku = new GokuObject("");
 		
 		//ventana
 		ventana = new JFrame("Words Game");
@@ -26,7 +32,6 @@ public class GUIWordGame extends JFrame {
 		
 		//panel inicio
 		panelInicio = new JPanel();
-		
 		panelInicio.setSize(1200,600);
 		panelInicio.setLocation(0,0);
 		panelInicio.setLayout(null);
@@ -92,6 +97,10 @@ public class GUIWordGame extends JFrame {
 		panelJuego.setSize(1200,600);
 		panelJuego.setLocation(0,0);
 		panelJuego.setLayout(null);
+		goku.setSize(300,300);
+		goku.setLocation(0,0);
+		goku.setVisible(true);
+		
 			
 		//fondo juego
 		fondoJuego = new JLabel();
@@ -99,7 +108,11 @@ public class GUIWordGame extends JFrame {
 		fondoJuego.setLocation(0,0);
 		fondoJuego.setIcon(new ImageIcon("src/imagenes/IjQ1.gif"));
 		fondoJuego.setVisible(true);
+		goku.setLocation(180,300);
+		goku.setText("NALGA");
 		panelJuego.add(fondoJuego,0);
+		panelJuego.add(goku,0);
+		
 		
 		//boton atras
 		botonAtras = new JLabel();
