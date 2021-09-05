@@ -1,6 +1,5 @@
 package wordsGame;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -144,8 +143,7 @@ public class GUIWordGame extends JFrame {
 			     
 			}
 		});
-		
-				
+					
 		//evento del boton jugar con click
 		botonJugar1.addMouseListener(new MouseAdapter () {
 			public void mousePressed(MouseEvent e) {
@@ -184,10 +182,7 @@ public class GUIWordGame extends JFrame {
 				panelInicio.setVisible(true);
 			}
 		});
-		
-		
-		
-		
+					
 		ventana.add(panelInicio);
 		ventana.setVisible(true);
 		login = new Logi();	

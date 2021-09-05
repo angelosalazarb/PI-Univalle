@@ -13,15 +13,36 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Logi. Esta clase permite ver la venta de login
+ */
 public class Logi extends JFrame {	
+	
+	/** The panel usuario. */
 	private JPanel panelUsuario;
+	
+	/** The fondo. */
 	private JLabel usuario, contraseña, fondo;
+	
+	/** The ventana. */
 	private JFrame ventana;
+	
+	/** The usu. */
 	private JTextField usu;
+	
+	/** The contra. */
 	private JPasswordField contra;
+	
+	/** The btn ing. */
 	private JButton btnIng;
+	
+	/** The usuar. */
 	public boolean usuar;
 	
+	/**
+	 * Instantiates a new logi.
+	 */
 	public Logi() {
 	ventana =new JFrame();
 	ventana.setSize(600,338);
@@ -76,6 +97,8 @@ public class Logi extends JFrame {
 	
 
 	ventana.add(panelUsuario);
+	
+	//Boton ingresar
 	
 	btnIng.addMouseListener(new MouseAdapter () {
 		public void mousePressed(MouseEvent e) {
