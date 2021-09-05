@@ -1,24 +1,34 @@
 /*
- * Autors: Juan Jos� Bailon, �ngelo Salazar Berm�dez, Juan Jos� Revelo
+ * Autors: Juan Jose Bailon, angelo Salazar Bermudez, Juan Jose Revelo
  * Email: angelo.salazar@correounivalle.edu.co
+ * 		   juan.bailon@correounivalle.edu.co
+ * 		   juan.jose.revelo@correounivalle.edu.co
  */
 
 package wordsGame;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GameLogic.
+ */
 public class GameLogic {
 
 	private InputOutput inputOutput;
 	private Login  login;
 	private String userName, wordListFile, usersDataFile;
-	private int level, round,correctWordsCounter, badWordsCounter;
+	private int level, round, badWordsCounter;
 	private ArrayList<String> importedWords, correctWords, wordsInPlay, userInputWords;
 	
 	
+	/**
+	 * Instantiates a new game logic.
+	 */
 	public GameLogic() {
 
         this.importedWords = new ArrayList<>();
@@ -30,14 +40,20 @@ public class GameLogic {
         login = new Login();
         userName=null;
         level = 0;
-        round=1;
-        correctWordsCounter=0;
+        round=1;      
         badWordsCounter=0;
         wordListFile=null;
         usersDataFile=null;
 
     }
 
+	/**
+	 * Instantiates a new game logic.
+	 *
+	 * @param usersDataFilePath the users data file path
+	 * @param wordsListFilePath the words list file path
+	 * @param username the username
+	 */
 	public GameLogic(String usersDataFilePath, String wordsListFilePath, String username) {
 
         this.importedWords = new ArrayList<>();
@@ -53,7 +69,6 @@ public class GameLogic {
         this.userName = map.get("username");
         this.level =  Integer.valueOf( map.get("level") );
         this.round = 1;
-        this.correctWordsCounter=0;
         this.badWordsCounter=0;
         this.wordListFile = wordsListFilePath;
         this.usersDataFile= usersDataFilePath;
@@ -63,6 +78,12 @@ public class GameLogic {
 	}
 	
 	
+	/**
+	 * Instantiates a new game logic.
+	 *
+	 * @param usersDataFilePath the users data file path
+	 * @param wordsListFilePath the words list file path
+	 */
 	public GameLogic(String usersDataFilePath, String wordsListFilePath) {
 
         this.importedWords = new ArrayList<>();
@@ -74,7 +95,6 @@ public class GameLogic {
         this.userName = null;
         this.level = 0;
         this.round = 1;
-        this.correctWordsCounter=0;
         this.badWordsCounter=0;
         this.wordListFile = wordsListFilePath;
         this.usersDataFile = usersDataFilePath;
@@ -86,12 +106,22 @@ public class GameLogic {
 	
 	
 
+    /**
+     * Import words. extracs the words for the game from the given file
+     *
+     * @param filePath the file path
+     */
     public void importWords(String filePath) {
     	
         importedWords = inputOutput.readFileToAnArray(filePath);
     }
 
     
+    /**
+     * Adds the user input word. 
+     *
+     * @param userWord the user word
+     */
     public void addUserInputWord(String userWord){
     	userWord = userWord.toUpperCase();
     	userInputWords.add(userWord);    	
@@ -107,6 +137,11 @@ public class GameLogic {
     }
     
     
+    /**
+     * Determine words in play. determines the number of words that are gonna be in play according to the level
+     *
+     * @return the int
+     */
     public int determineWordsInPlay() {
     	int num;
     	
@@ -121,6 +156,9 @@ public class GameLogic {
     }
     
     
+    /**
+     * Fill words in play. fill the array wordsInPlay with a set of words taken randomly form the array importedWords  
+     */
     public void fillWordsInPlay() {
     	
     	Random random = new Random();
@@ -142,6 +180,12 @@ public class GameLogic {
     }
     
     
+    /**
+     * Check for matching words. checks if the given word is part of the array wordsInPlay
+     *
+     * @param myWord the my word
+     * @return true, if successful
+     */
     public boolean checkForMatchingWords(String myWord) {
     	
     	boolean flag=false;
@@ -156,6 +200,12 @@ public class GameLogic {
     }
     
     
+    /**
+     * Member of correct words. checks if the given word is part of the array correctWords
+     *
+     * @param myWord the my word
+     * @return true, if successful
+     */
     public boolean memberOfCorrectWords(String myWord) {
     	
     	boolean flag=false;
@@ -170,6 +220,10 @@ public class GameLogic {
     }
     
     
+    /**
+     * Next level. prepares everything necessary for the level change, sets the new values that the attributes
+     *             are gonna take in the next level
+     */
     public void nextLevel() {
     	
     	if(level>5) {
@@ -181,7 +235,6 @@ public class GameLogic {
     		level++;
     	}
     	
-    	correctWordsCounter=0;
     	badWordsCounter=0;
     	importedWords.addAll( correctWords );
     	importedWords.addAll(wordsInPlay);
@@ -195,6 +248,11 @@ public class GameLogic {
     }
     
     
+    /**
+     * Still alive. checks if the user has NOT reach the maximum number of errors for it's corresponding level
+     *
+     * @return true, if successful
+     */
     public boolean stillAlive() {
     	boolean flag;
     	
@@ -225,6 +283,12 @@ public class GameLogic {
     }
     
     
+    /**
+     * Ready for next level. checks  if the user has the minimum amount of requirements(correct words inputed) to go
+     * 							the next level 
+     *
+     * @return true, if successful
+     */
     public boolean readyForNextLevel() {
     	
     	boolean flag;
@@ -256,6 +320,9 @@ public class GameLogic {
     }
     
   
+    /**
+     * Sets the second round. sets the new values that some of the attributes need to have to start the second round
+     */
     public void setSecondRound() {
     	
     	round=2;
@@ -264,6 +331,11 @@ public class GameLogic {
     	fillWordsInPlay();
     }
     
+    /**
+     * Ready for second round. If true the user has inputted correctly all the words in play presented to him in the first round.
+     *
+     * @return true, if successful
+     */
     public boolean readyForSecondRound() {
     	
     	boolean flag;
@@ -295,6 +367,11 @@ public class GameLogic {
     }
     
     
+    /**
+     * Sets the level. sets a new value for the attribute level
+     *
+     * @param newLevel the new level
+     */
     public void setLevel( int newLevel ) {
     	
     	String newFileContent="";
@@ -316,10 +393,22 @@ public class GameLogic {
     	
     }
     
+    
+    /**
+     * Gets the user level.
+     *
+     * @return the user level
+     */
     public int  getUserLevel() {
     	return  this.level;
     }
     
+    /**
+     * Gets the user level.
+     *
+     * @param username the username
+     * @return the user level
+     */
     public int  getUserLevel(String username) {
     	String strlvl;
     	strlvl = login.getUserInfo(username).get("level");
@@ -327,69 +416,121 @@ public class GameLogic {
     	return  level;
     }
 
+	/**
+	 * Gets the user name.
+	 *
+	 * @return the user name
+	 */
 	public String getUserName() {
 		return userName;
 	}
-
-	public void setUserName(String username, String usersDataFilePath ) {
-			
-			this.login = new Login(usersDataFilePath);	   
-	        HashMap<String, String> map = this.login.getUserInfo(username);	        
-	        this.userName = map.get("username");			
-	}
+	
 		
+	/**
+	 * Gets the round.
+	 *
+	 * @return the round
+	 */
 	public int getRound() {
 		return round;
 	}
 
+	/**
+	 * Sets the round.
+	 *
+	 * @param round the new round
+	 */
 	public void setRound(int round) {
 		this.round = round;
 	}
 
-	public int getCorrectWordsCounter() {
-		return correctWordsCounter;
-	}
 
-	public void setCorrectWordsCounter(int correctWordsCounter) {
-		this.correctWordsCounter = correctWordsCounter;
-	}
-
+	/**
+	 * Gets the bad words counter.
+	 *
+	 * @return the bad words counter
+	 */
 	public int getBadWordsCounter() {
 		return badWordsCounter;
 	}
 
+	/**
+	 * Sets the bad words counter.
+	 *
+	 * @param badWordsCounter the new bad words counter
+	 */
 	public void setBadWordsCounter(int badWordsCounter) {
 		this.badWordsCounter = badWordsCounter;
 	}
 
+	/**
+	 * Gets the correct words.
+	 *
+	 * @return the correct words
+	 */
 	public ArrayList<String> getCorrectWords() {
 		return correctWords;
 	}
 
+	/**
+	 * Sets the correct words.
+	 *
+	 * @param correctWords the new correct words
+	 */
 	public void setCorrectWords(ArrayList<String> correctWords) {
 		this.correctWords = correctWords;
 	}
 
+	/**
+	 * Gets the words in play.
+	 *
+	 * @return the words in play
+	 */
 	public ArrayList<String> getWordsInPlay() {
 		return wordsInPlay;
 	}
 
+	/**
+	 * Sets the words in play.
+	 *
+	 * @param wordsInPlay the new words in play
+	 */
 	public void setWordsInPlay(ArrayList<String> wordsInPlay) {
 		this.wordsInPlay = wordsInPlay;
 	}
 
+	/**
+	 * Gets the user input words.
+	 *
+	 * @return the user input words
+	 */
 	public ArrayList<String> getUserInputWords() {
 		return userInputWords;
 	}
 
+	/**
+	 * Sets the user input words.
+	 *
+	 * @param userInputWords the new user input words
+	 */
 	public void setUserInputWords(ArrayList<String> userInputWords) {
 		this.userInputWords = userInputWords;
 	}
 
+	/**
+	 * Gets the imported words.
+	 *
+	 * @return the imported words
+	 */
 	public ArrayList<String> getImportedWords() {
 		return importedWords;
 	}
 
+	/**
+	 * Sets the imported words.
+	 *
+	 * @param importedWords the new imported words
+	 */
 	public void setImportedWords(ArrayList<String> importedWords) {
 		this.importedWords = importedWords;
 	}

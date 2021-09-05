@@ -10,8 +10,8 @@ public class main {
 	
 		/**
 		 * System.out.println(gameLogic.getWordsInPlay().size());
-				System.out.println(  ((gameLogic.getUserLevel()+1)*4)  );
-				System.out.println(  gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4)   );
+   		   System.out.println(  ((gameLogic.getUserLevel()+1)*4)  );
+		   System.out.println(  gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4)   );
 		 */
 		
 		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";

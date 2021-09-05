@@ -36,9 +36,9 @@ public class ConsoleView {
 			
 			String tempUsername = gameLogic.getUserName();
 			gameLogic = new GameLogic(usersDataFilePath, wordListFilePath, tempUsername);			
+			gameLogic.fillWordsInPlay();			
 		}
 		//if( gameLogic.getWordsInPlay().isEmpty() ) {
-			gameLogic.fillWordsInPlay();			
 		//}
 
 		System.out.println("Estas son las palabras en juego: ");
@@ -56,7 +56,11 @@ public class ConsoleView {
 		
 		while (true) {
 			
-			//boolean aux = gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4) ;
+			boolean aux = gameLogic.getCorrectWords().size()==((gameLogic.getUserLevel()+1)*4) ;
+			Boolean bol = gameLogic.readyForNextLevel();
+			//System.out.println(" aux: "+aux+"  bol: "+bol);
+			System.out.println("importedSize: "+gameLogic.getImportedWords().size()+"  inplaySize: "+gameLogic.getWordsInPlay().size()+"  correctSize: "+gameLogic.getCorrectWords().size());
+			
 			
 			System.out.print(" --> ");
 			pregunta = input.nextLine();
@@ -91,13 +95,16 @@ public class ConsoleView {
 				playCorrspondingLevel();				
 				break;
 			}
-			else if( gameLogic.readyForNextLevel()   ) {
+			else if( bol && aux ) {
 				
-				//if( gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4)  ) {					
+				System.out.println(gameLogic.getWordsInPlay().size());
+		   		System.out.println(  ((gameLogic.getUserLevel()+1)*4)  );
+				System.out.println(  gameLogic.getCorrectWords().size()+1==((gameLogic.getUserLevel()+1)*4)   );
+				if( gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4)  ) {					
 					System.out.println("EXELENTE!! has ganado, vamos al siguiente nivel.");
-					System.out.println("");
+					System.out.println("lololol");
 					break;
-				//}
+				}
 			}
 			else if( pregunta.equals("STOP") ) {
 				
@@ -135,7 +142,7 @@ public class ConsoleView {
 							
 						}else {
 							System.out.println("No acertaste las suficientes palabras, NO PUEDES SUBIR DE NIVEL");
-							break;
+							break;  
 						}
 						
 					}
