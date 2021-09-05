@@ -10,6 +10,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/*
+ * @Author: Ángelo Salazar, Juan José Revelo, Juan José Bailon
+ * This class extends from JPanel and create a object of Goku with two JLabels, this allows 
+ * to work and use this JPanel like and object and give facilities to implement it in the GUI
+ */
 public class GokuObject extends JPanel {
 	
 	private JLabel cloud, wordLabel;

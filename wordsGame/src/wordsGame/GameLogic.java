@@ -114,7 +114,6 @@ public class GameLogic {
     	
     	Random random = new Random();
     	int num = determineWordsInPlay();
-    	
     	if( !wordsInPlay.isEmpty() ) {
     		wordsInPlay.clear();
     	}

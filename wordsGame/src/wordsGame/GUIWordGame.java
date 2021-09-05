@@ -28,9 +28,10 @@ public class GUIWordGame extends JFrame {
 		this.goku = new GokuObject("");
 		this.music = new PlayMusic();
 		
-		ArrayList<String> wordsInGame;
 		
+		ArrayList<String> wordsInGame;
 		wordsInGame = new ArrayList<String>();
+		
 		wordsInGame.add("Prueba1");
 		wordsInGame.add("Prueba2");
 		wordsInGame.add("Prueba3");
@@ -199,8 +200,6 @@ public class GUIWordGame extends JFrame {
 	 * @return <void>
 	 * */
 	
-	
-	
 	public void gokuFlying(ArrayList<String >wordsInGame) {
 		music.play("src/music/nubecita.wav");
 	Timer timer = new Timer();
@@ -236,7 +235,7 @@ public class GUIWordGame extends JFrame {
 					
 				};
 			};
-	timer.scheduleAtFixedRate(event, 20, 5);
+	timer.scheduleAtFixedRate(event, 120, 5);
 	}
 	
 }
