@@ -2,6 +2,9 @@ package wordsGame;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -21,6 +24,15 @@ public class GUIWordGame extends JFrame {
 	
 	public GUIWordGame() {
 		this.goku = new GokuObject("");
+		
+		ArrayList<String> wordsInGame;
+		
+		wordsInGame = new ArrayList<String>();
+		wordsInGame.add("Prueba1");
+		wordsInGame.add("Prueba2");
+		wordsInGame.add("Prueba3");
+		wordsInGame.add("Prueba4");
+		wordsInGame.add("Prueba5");
 		
 		//ventana
 		ventana = new JFrame("Words Game");
@@ -109,11 +121,8 @@ public class GUIWordGame extends JFrame {
 		fondoJuego.setIcon(new ImageIcon("src/imagenes/IjQ1.gif"));
 		fondoJuego.setVisible(true);
 		goku.setLocation(600,150);
-		goku.setText("PRUEBA");
 		panelJuego.add(fondoJuego,0);
-		panelJuego.add(goku,0);
-		
-		
+	
 		//boton atras
 		botonAtras = new JLabel();
 		botonAtras.setSize(150,150);
@@ -125,15 +134,17 @@ public class GUIWordGame extends JFrame {
 		//evento del boton jugar con click
 		botonJugar.addMouseListener(new MouseAdapter () {
 			public void mousePressed(MouseEvent e) {
+				gokuFlying(wordsInGame);
 				panelInicio.setVisible(false);
 				ventana.add(panelJuego);
 				panelJuego.setVisible(true);
 			}
 		});
 				
-		//evento del boton jugar con click
+		//evento del boton jugar con click panel como jugar
 		botonJugar1.addMouseListener(new MouseAdapter () {
 			public void mousePressed(MouseEvent e) {
+				gokuFlying(wordsInGame);
 				panelComoJugar.setVisible(false);
 				ventana.add(panelJuego);
 				panelJuego.setVisible(true);
@@ -175,4 +186,54 @@ public class GUIWordGame extends JFrame {
 			
 			
 			}
+	
+	/*
+	 * @Author: Ángelo Salazar
+	 * Contract: <gokuFlying><void><ArrayList<String>> ---> <List>
+	 * Purpose: This method will move Goku from side to side of the screen
+	 * and will showing the words that are in the array this words are the words in play
+	 * @param ArrayList<String> wordsInGame
+	 * @return <void>
+	 * */
+	
+	
+	
+	public void gokuFlying(ArrayList<String >wordsInGame) {
+		
+	Timer timer = new Timer();
+	TimerTask event = new TimerTask() {
+		int ctr = 0;
+		int x = 1200;
+		
+		@Override
+		
+			public void run() {
+							
+					if(x > -200) {
+						goku.setLocation(x, 150);
+						panelJuego.add(goku,0);
+						x = x - 2;
+						System.out.println("X: " + x);
+						System.out.println("CTR: " + ctr);
+					}
+					else if(x == -200) {
+						x = 1200;
+						if(ctr<wordsInGame.size()) {
+							goku.setText(wordsInGame.get(ctr));
+							System.out.println("OUT");
+							System.out.println("CTR2: " + ctr);
+							ctr ++;
+						}
+						else {
+							//Ingresar interfaz de palabras 
+							System.out.println("Se acabaron las palabras");
+							timer.cancel();
+						}
+					}
+					
+				};
+			};
+	timer.scheduleAtFixedRate(event, 20, 5);
+	}
+	
 }
