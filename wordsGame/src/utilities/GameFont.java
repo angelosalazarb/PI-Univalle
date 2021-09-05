@@ -6,6 +6,10 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
+
+/*
+ * This class will create a specific font that will be used in the project
+ */
 public class GameFont {
 	public static java.awt.Font pixeled = GameFont.textFont();
 
