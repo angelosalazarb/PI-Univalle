@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import utilities.GameFont;
 import utilities.GokuObject;
 import utilities.Titles;
+import utilities.PlayMusic;
 
 public class GUIWordGame extends JFrame {
 	private JPanel panelJuego, panelInicio, panelComoJugar;
@@ -21,9 +22,11 @@ public class GUIWordGame extends JFrame {
 	private JLabel fondoInicio,fondoJuego, fondoComoJugar;
 	private JFrame ventana;
 	private GokuObject goku;
+	private PlayMusic music; 
 	
 	public GUIWordGame() {
 		this.goku = new GokuObject("");
+		this.music = new PlayMusic();
 		
 		ArrayList<String> wordsInGame;
 		
@@ -199,16 +202,16 @@ public class GUIWordGame extends JFrame {
 	
 	
 	public void gokuFlying(ArrayList<String >wordsInGame) {
-		
+		music.play("src/music/nubecita.wav");
 	Timer timer = new Timer();
 	TimerTask event = new TimerTask() {
 		int ctr = 0;
 		int x = 1200;
 		
 		@Override
-		
+			
 			public void run() {
-							
+			
 					if(x > -200) {
 						goku.setLocation(x, 150);
 						panelJuego.add(goku,0);
