@@ -23,6 +23,7 @@ public class GokuObject extends JPanel {
 	
 	public GokuObject(String newWord) {
 		this.setOpaque(false);
+		
 		try {
 			pixeled = Font.createFont(Font.TRUETYPE_FONT, new File(GokuObject.class.getResource("/fonts/pixeled.ttf").getFile()));
 			GraphicsEnvironment graphicE = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -38,8 +39,10 @@ public class GokuObject extends JPanel {
 		this.wordLabel = new JLabel(usedWord);
 		float size = 17;
 		wordLabel.setForeground(new Color(0,0,0));
+
 		wordLabel.setBounds(26,5, 350, 350);
 		wordLabel.setFont(pixeled.deriveFont(size));
+
 		cloud = new JLabel();
 		cloud.setIcon(new ImageIcon(GokuObject.class.getResource("/imagenes/gokuFlying.gif")));
 		cloud.setBounds(0,0,250,250);
@@ -54,4 +57,6 @@ public class GokuObject extends JPanel {
 	public void setText(String text) {
 		wordLabel.setText(text);
 	}
+	
+
 }

@@ -1,11 +1,14 @@
 package wordsGame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import java.awt.event.MouseListener;
+import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,18 +16,23 @@ import javax.swing.JPanel;
 
 import utilities.GameFont;
 import utilities.GokuObject;
+import utilities.Logi;
 import utilities.Titles;
 import utilities.PlayMusic;
 
 public class GUIWordGame extends JFrame {
-	private JPanel panelJuego, panelInicio, panelComoJugar;
+	private JPanel panelJuego, panelInicio, panelComoJugar, panelUsuario;
 	private JLabel botonJugar,botonComoJugar,botonAtras, botonSalir, botonJugar1;
 	private JLabel fondoInicio,fondoJuego, fondoComoJugar;
 	private JFrame ventana;
 	private GokuObject goku;
 	private PlayMusic music; 
+	private Logi login;
 	
+
 	public GUIWordGame() {
+		this.goku = new GokuObject("");
+		this.login = new Logi();
 		this.goku = new GokuObject("");
 		this.music = new PlayMusic();
 		
@@ -46,8 +54,9 @@ public class GUIWordGame extends JFrame {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setLocationRelativeTo(null);
 		
-		//panel inicio
+		//panel incio
 		panelInicio = new JPanel();
+		
 		panelInicio.setSize(1200,600);
 		panelInicio.setLocation(0,0);
 		panelInicio.setLayout(null);
@@ -92,6 +101,12 @@ public class GUIWordGame extends JFrame {
 		fondoComoJugar.setVisible(true);
 		panelComoJugar.add(fondoComoJugar,0);
 		
+		//panel usuario
+		panelUsuario= new JPanel();				
+		panelUsuario.setSize(1200,600);
+		panelUsuario.setLocation(0,0);
+		panelUsuario.setLayout(null);
+		
 		//boton salir
 		botonSalir = new JLabel();
 		botonSalir.setSize(318,106);
@@ -113,10 +128,6 @@ public class GUIWordGame extends JFrame {
 		panelJuego.setSize(1200,600);
 		panelJuego.setLocation(0,0);
 		panelJuego.setLayout(null);
-		goku.setSize(300,300);
-		goku.setLocation(0,0);
-		goku.setVisible(true);
-		
 			
 		//fondo juego
 		fondoJuego = new JLabel();
@@ -135,23 +146,26 @@ public class GUIWordGame extends JFrame {
 		botonAtras.setVisible(true);
 		panelJuego.add(botonAtras,0);
 		
-		//evento del boton jugar con click
+		
+		//evento del boton jugar con click panel inicio
 		botonJugar.addMouseListener(new MouseAdapter () {
+			
 			public void mousePressed(MouseEvent e) {
-				gokuFlying(wordsInGame);
-				panelInicio.setVisible(false);
+				panelInicio.setVisible(true);
 				ventana.add(panelJuego);
 				panelJuego.setVisible(true);
+				gokuFlying(wordsInGame);
+			     
 			}
 		});
 				
 		//evento del boton jugar con click panel como jugar
 		botonJugar1.addMouseListener(new MouseAdapter () {
 			public void mousePressed(MouseEvent e) {
-				gokuFlying(wordsInGame);
-				panelComoJugar.setVisible(false);
-				ventana.add(panelJuego);
+				panelComoJugar.setVisible(true);
+				ventana.add(panelJuego);				
 				panelJuego.setVisible(true);
+				gokuFlying(wordsInGame);
 			}
 		});
 			
@@ -161,6 +175,7 @@ public class GUIWordGame extends JFrame {
 				panelInicio.setVisible(false);
 				ventana.add(panelComoJugar);
 				panelComoJugar.setVisible(true);
+				
 			}
 		});
 		
@@ -181,13 +196,12 @@ public class GUIWordGame extends JFrame {
 				panelInicio.setVisible(true);
 			}
 		});
-		
-		
-		
-		
+					
 		ventana.add(panelInicio);
 		ventana.setVisible(true);
+		login = new Logi();	
 			
+
 			
 			}
 	
@@ -227,7 +241,7 @@ public class GUIWordGame extends JFrame {
 							ctr ++;
 						}
 						else {
-							//Ingresar interfaz de palabras 
+							login = new Logi(); 
 							System.out.println("Se acabaron las palabras");
 							timer.cancel();
 						}
@@ -237,5 +251,11 @@ public class GUIWordGame extends JFrame {
 			};
 	timer.scheduleAtFixedRate(event, 120, 5);
 	}
-	
+
+
 }
+
+
+
+	
+

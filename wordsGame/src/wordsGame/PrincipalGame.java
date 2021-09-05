@@ -2,6 +2,8 @@ package wordsGame;
 
 import java.awt.EventQueue;
 
+import utilities.Logi;
+
 
 
 
@@ -15,6 +17,7 @@ public class PrincipalGame {
 			
 			public void run() {
 				GUIWordGame miVista = new GUIWordGame();
+				//Logi miVista = new Logi();
 			}
 		});
 
