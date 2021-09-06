@@ -168,7 +168,7 @@ public class LoginGUI extends JFrame {
 	 *
 	 * @return true, if is sign in successful
 	 */
-	public boolean isSignInSuccessful() {
+	public boolean getSignInSuccessful() {
 		return signInSuccessful;
 	}
 

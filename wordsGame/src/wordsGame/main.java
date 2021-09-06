@@ -23,6 +23,8 @@ public class main {
 				//GameGUI gui = new GameGUI();
 				LoginGUI loginGui = new LoginGUI(login); 
 				
+				//System.out.println( loginGui.getSignInSuccessful() );
+				
 			}
 		} );
 		
