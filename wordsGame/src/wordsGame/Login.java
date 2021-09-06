@@ -16,6 +16,7 @@ public class Login {
 	
 	/** The users data. */
 	private ArrayList< User > usersData;
+	String userDataFilePath;
 	
 	
 	/**
@@ -23,6 +24,7 @@ public class Login {
 	 */
 	public Login() {
 		this.usersData = new ArrayList< User >();
+		this.userDataFilePath=null;
 	}
 	
 	/**
@@ -32,6 +34,7 @@ public class Login {
 	 */
 	public Login(String filePath) {
 		this.usersData = extractUsersData( filePath );
+		this.userDataFilePath = filePath;
 	}
 	
 	
@@ -167,6 +170,28 @@ public class Login {
 			this.usersData.add(user);
 		}
 	}
+	
+	
+	
+	/**
+	 * Adds the new user. Adds a new user to the file locate in the path specific by the attribute
+	 * 					  usersDataFilePath, and to the attribute usersData
+	 *
+	 * @param username the username
+	 * @param password the password
+	 */
+	public void addNewUser(String username, String password) {
+		
+		if( userExist(username) ) {
+			System.out.println("This user: "+ username + " already exist.");
+		}
+		else {
+			User user = new User(username, password, 1);
+			user.addToDataBase( this.userDataFilePath );
+			this.usersData.add(user);
+		}
+	}
+	
 	
 	
 	/**

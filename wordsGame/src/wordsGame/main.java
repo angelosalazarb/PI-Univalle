@@ -3,10 +3,15 @@ package wordsGame;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 
+import utilities.LoginGUI;
+
 
 public class main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
+		// TODO Auto-generated method stub
+		
+		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";
 		
 		
 		EventQueue.invokeLater( new Runnable() {
@@ -14,23 +19,14 @@ public class main {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				GameGUI gui = new GameGUI();				
+				Login login = new Login(path2);
+				//GameGUI gui = new GameGUI();
+				LoginGUI loginGui = new LoginGUI(login); 
 				
 			}
 		} );
 		
 		
-		
-		
-		// TODO Auto-generated method stub
-	
-		/**
-		 * System.out.println(gameLogic.getWordsInPlay().size());
-   		   System.out.println(  ((gameLogic.getUserLevel()+1)*4)  );
-		   System.out.println(  gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4)   );
-		 */
-		
-		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";
 		
 		//InputOutput varInputOutput = new InputOutput();
 		//User user = new User("juan", "la vaca lola", 3);
@@ -42,19 +38,7 @@ public class main {
 		//consoleView.startGame();
 		
 		//ArrayList<Integer> myvector = new ArrayList<>();
-		//ArrayList<Integer> myvector2 = new ArrayList<>();
-		/*
-		myvector.add(1);
-		myvector.add(2);
-		myvector.add(3);
-		myvector2.add(20);
-		myvector2.add(21);
-		myvector2.add(22);
-		myvector.addAll(myvector2);
-		System.out.println(myvector);
-		System.out.println(myvector2);
-		/*
-		
+		//ArrayList<Integer> myvector2 = new ArrayList<>();	
 		
 		
 		/*
