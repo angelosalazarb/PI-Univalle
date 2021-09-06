@@ -1,11 +1,27 @@
 package wordsGame;
 
+import java.awt.EventQueue;
 import java.util.ArrayList;
 
 
 public class main {
 
 	public static void main(String[] args) {
+		
+		
+		EventQueue.invokeLater( new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				GameGUI gui = new GameGUI();				
+				
+			}
+		} );
+		
+		
+		
+		
 		// TODO Auto-generated method stub
 	
 		/**
@@ -20,9 +36,10 @@ public class main {
 		//User user = new User("juan", "la vaca lola", 3);
 		//Login login = new Login(path2);
 		//GameLogic gamelogic = new GameLogic( path2, path, "juan1" );
-		ConsoleView consoleView = new ConsoleView(path2, path);
 		
-		consoleView.startGame();
+		//ConsoleView consoleView = new ConsoleView(path2, path);
+		
+		//consoleView.startGame();
 		
 		//ArrayList<Integer> myvector = new ArrayList<>();
 		//ArrayList<Integer> myvector2 = new ArrayList<>();
