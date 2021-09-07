@@ -39,7 +39,7 @@ public class LoginGUI extends JFrame {
 	private JButton signIn, signUp;
 	private Login login;
 	private Escucha escucha;
-	private boolean signInSuccessful;
+	public boolean signInSuccessful;
 	
 	
 	/**
@@ -50,7 +50,7 @@ public class LoginGUI extends JFrame {
 	public LoginGUI( Login login ) {
 		
 		this.login = login;
-		this.signInSuccessful = false;
+		//this.signInSuccessful = false;
 		
 		initGUI();
 		
@@ -58,7 +58,7 @@ public class LoginGUI extends JFrame {
 		this.setSize(600,338);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		
 	}
@@ -171,6 +171,14 @@ public class LoginGUI extends JFrame {
 	public boolean getSignInSuccessful() {
 		return signInSuccessful;
 	}
+	
+	public void hideLoginGUI() {
+		super.setVisible(false);
+	}
+	
+	public void disposeLoginGUI() {
+		super.dispose();
+	}
 
 
 	/**
@@ -198,7 +206,9 @@ public class LoginGUI extends JFrame {
 				
 				if(flag) {
 					signInSuccessful = true;
-					System.exit(0);
+					hideLoginGUI();
+					System.out.println("&&&&&&&&&&&&");
+					//System.exit(0);
 				}
 				else {
 					
@@ -220,7 +230,8 @@ public class LoginGUI extends JFrame {
 					if(flag) {
 						login.addNewUser( usernameField.getText(), String.valueOf(passwordField.getPassword()) );
 						signInSuccessful = true;
-						System.exit(0);
+						hideLoginGUI();
+						//System.exit(0);
 					}
 					else {
 						System.out.println( "This username already exist" );

@@ -13,17 +13,15 @@ public class main {
 		
 		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";
 		
-		
 		EventQueue.invokeLater( new Runnable() {
 			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				Login login = new Login(path2);
-				//GameGUI gui = new GameGUI();
-				LoginGUI loginGui = new LoginGUI(login); 
+				//LoginGUI loginGui = new LoginGUI(login);
+				GUIWordGame guiWordGame = new GUIWordGame( path2 );
 				
-				//System.out.println( loginGui.getSignInSuccessful() );
 				
 			}
 		} );
