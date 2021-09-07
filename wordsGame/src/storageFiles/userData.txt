@@ -1,8 +1,12 @@
-juan1 1 siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=
+juan1 3 siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=
 juan2 2 siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=
-juan3 3 m20EptRJZlnLt7WyNsAgCmhvxnQOur4kWdMNiZz9Gh4=
+juan3 3 y5wkX2z0kQrKRHoC6RATm1RW1j1TvlOOOG7UhHLqyl8=
 juan4 4 XpypQuAHKfdCGZfdgrWUV+6gCyF6oeD62qbTeyx8Olc=
 juan5 5 y5wkX2z0kQrKRHoC6RATm1RW1j1TvlOOOG7UhHLqyl8=
 revelo 1 mx0Snqpehb6fO9+YXyXYhGME2FV/UYVxAtBljrwjFVA=
+<<<<<<< HEAD
 angelo1 1 bYjBrZOyQ2FOPCIS/lyuoxUfpgVSQCz+XOOmqrZK5nI=
 juan 1 q1tiCBsdMF540Nqtss0jRws/rrZa9zcGJ3mLchnqIGE=
+=======
+juan200 1 siHZ27CDp/M0KNfCo8MZiuklYU1wIQ4ocWzKp81N23k=
+>>>>>>> 5938b68a60e068d115611c719b8040f7698d9a9f
