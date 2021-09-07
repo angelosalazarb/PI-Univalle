@@ -16,7 +16,8 @@ public class Login {
 	
 	/** The users data. */
 	private ArrayList< User > usersData;
-	String userDataFilePath;
+	private String userDataFilePath, username;
+	
 	
 	
 	/**
@@ -25,6 +26,7 @@ public class Login {
 	public Login() {
 		this.usersData = new ArrayList< User >();
 		this.userDataFilePath=null;
+		this.username=null;
 	}
 	
 	/**
@@ -35,6 +37,7 @@ public class Login {
 	public Login(String filePath) {
 		this.usersData = extractUsersData( filePath );
 		this.userDataFilePath = filePath;
+		this.username=null;
 	}
 	
 	
@@ -62,6 +65,7 @@ public class Login {
 			
 			if( user.equals(username) && userPassword.equals(password) ) {
 				flag=true;
+				this.username = username;
 			}
 			
 		}
@@ -168,6 +172,7 @@ public class Login {
 			User user = new User(username, password, 1);
 			user.addToDataBase(filePath);
 			this.usersData.add(user);
+			this.username = username;
 		}
 	}
 	
@@ -189,6 +194,7 @@ public class Login {
 			User user = new User(username, password, 1);
 			user.addToDataBase( this.userDataFilePath );
 			this.usersData.add(user);
+			this.username = username;
 		}
 	}
 	
@@ -241,6 +247,16 @@ public class Login {
 	 */
 	public void setUsersData(String filePath) {
 		this.usersData = extractUsersData(filePath);
+	}
+
+	
+	/**
+	 * Gets the username.
+	 *
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
 	}
 	
 	

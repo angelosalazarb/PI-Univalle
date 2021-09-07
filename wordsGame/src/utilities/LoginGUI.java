@@ -27,7 +27,7 @@ import wordsGame.Login;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class LoginGUI.
+ * The Class LoginGUI. this class creates the GUI for the login process
  */
 public class LoginGUI extends JFrame {
 	
@@ -207,8 +207,6 @@ public class LoginGUI extends JFrame {
 				if(flag) {
 					signInSuccessful = true;
 					hideLoginGUI();
-					System.out.println("&&&&&&&&&&&&");
-					//System.exit(0);
 				}
 				else {
 					
@@ -231,7 +229,6 @@ public class LoginGUI extends JFrame {
 						login.addNewUser( usernameField.getText(), String.valueOf(passwordField.getPassword()) );
 						signInSuccessful = true;
 						hideLoginGUI();
-						//System.exit(0);
 					}
 					else {
 						System.out.println( "This username already exist" );

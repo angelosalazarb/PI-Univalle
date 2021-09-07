@@ -3,40 +3,46 @@ package wordsGame;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import utilities.GokuObject;
 import utilities.LoginGUI;
 
 
 public class GUIWordGame extends JFrame {
 	
-	private JFrame myWindow;
+	//private JFrame myWindow;
 	private JPanel homePanel, howToPlayPanel, gameZonePanel;
 	private JLabel jugarButton, comoJugarButton, salirButton, goBackButton;
 	private JLabel homeBackground, gameZoneBackground, howToPlayBackground;
 	private Escucha escucha;
 	private Login login;
 	private LoginGUI loginGUI;
-	private String usersDataFilePath, wordsListFilePath;
+	private String usersDataFilePath, wordsListFilePath, username;
 	//private boolean sigInSuccesful;
 	private boolean flag;
+	private GokuObject goku;
+	private GameLogic gameLogic;
+	//private ArrayList<String> list;
 	
 	
 	
-	public GUIWordGame( String usersDataFilePath ) {
+	public GUIWordGame( String usersDataFilePath, String wordsListFilePath ) {
 		
 		this.usersDataFilePath = usersDataFilePath;
-		login = new Login( this.usersDataFilePath );
+		this.wordsListFilePath = wordsListFilePath;
+		this.login = new Login( this.usersDataFilePath );
 		
+		this.username=null;
 		this.flag = true;
-		//loginGUI = new LoginGUI( login );
-		//this.sigInAlready=false;
-		
-		//loginGUI lgui = new LoginGUI(login, this);
+		this.goku = new GokuObject("");
 		
 		initGUI();
 		
@@ -136,8 +142,11 @@ public class GUIWordGame extends JFrame {
 		gameZoneBackground.setLocation(0,0);
 		gameZoneBackground.setIcon(new ImageIcon("src/imagenes/gameZone_background.gif"));
 		gameZoneBackground.setVisible(true);
-		//goku.setLocation(600,150);
 		gameZonePanel.add(gameZoneBackground,0);
+		
+		//goku object
+		goku.setLocation(600,150);
+		//gameZonePanel.add(goku,0);
 	
 		//go back button
 		goBackButton = new JLabel();
@@ -153,6 +162,58 @@ public class GUIWordGame extends JFrame {
 		this.add(howToPlayPanel);
 		this.add(gameZonePanel);
 
+	}
+	
+	
+	
+	
+	/*
+	 * @Author: Angelo Salazar
+	 * Contract: <gokuFlying><void><ArrayList<String>> ---> <List>
+	 * Purpose: This method will move Goku from side to side of the screen
+	 * and will showing the words that are in the array this words are the words in play
+	 * @param ArrayList<String> wordsInGame
+	 * @return <void>
+	 * */
+	
+	public void gokuFlying( ArrayList<String> wordsInGame ) {
+		
+		//music.play("src/music/nubecita.wav");
+		Timer timer = new Timer();
+		TimerTask event = new TimerTask() {
+		int ctr = 0;
+		int x = 1200;
+		
+		@Override
+			
+			public void run() {
+			
+					if(x > -200) {
+						goku.setLocation(x, 150);
+						gameZonePanel.add(goku,0);
+						x = x - 2;
+						System.out.println("X: " + x);
+						System.out.println("CTR: " + ctr);
+					}
+					else if(x == -200) {
+						x = 1200;
+						if(ctr<wordsInGame.size()) {
+							goku.setText(wordsInGame.get(ctr));
+							System.out.println("OUT");
+							System.out.println("CTR2: " + ctr);
+							ctr ++;
+						}
+						else {
+							loginGUI = new LoginGUI(login); 
+							System.out.println("Se acabaron las palabras");
+							timer.cancel();
+						}
+					}
+					
+				};
+			};
+			
+			timer.scheduleAtFixedRate(event, 120, 5);
 	}
 	
 	
@@ -174,9 +235,17 @@ public class GUIWordGame extends JFrame {
 				boolean temp = loginGUI.getSignInSuccessful();
 				
 				if( temp ) {
+					System.out.println( "username: "+ login.getUsername() );
+					username = login.getUsername();
+					gameLogic = new GameLogic( usersDataFilePath, wordsListFilePath, login.getUsername() );
+					gameLogic.fillWordsInPlay();
+
 					homePanel.setVisible(false);
 					gameZonePanel.setVisible(true);
 					temp=false;
+					
+					System.out.println( gameLogic.getWordsInPlay() );
+					gokuFlying( gameLogic.getWordsInPlay() );
 				}
 				else {
 					loginGUI.setVisible(true);

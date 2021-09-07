@@ -20,7 +20,7 @@ public class main {
 				// TODO Auto-generated method stub
 				Login login = new Login(path2);
 				//LoginGUI loginGui = new LoginGUI(login);
-				GUIWordGame guiWordGame = new GUIWordGame( path2 );
+				GUIWordGame guiWordGame = new GUIWordGame( path2, path );
 				
 				
 			}

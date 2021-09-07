@@ -427,6 +427,15 @@ public class GameLogic {
 	
 		
 	/**
+	 * Sets the user name.
+	 *
+	 * @param userName the new user name
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/**
 	 * Gets the round.
 	 *
 	 * @return the round
@@ -534,8 +543,6 @@ public class GameLogic {
 	public void setImportedWords(ArrayList<String> importedWords) {
 		this.importedWords = importedWords;
 	}
-    
-    
     
    
 	    
