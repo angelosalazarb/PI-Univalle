@@ -2,6 +2,8 @@ package wordsGame;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import utilities.LoginGUI;
 
@@ -12,6 +14,34 @@ public class main {
 		// TODO Auto-generated method stub
 		
 		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";
+		
+		/*
+		ArrayList<User> myvector = new ArrayList<>();
+		
+		myvector.add( new User( "juan1", "hola", 1 ) );
+		myvector.add( new User( "juan2", "hola", 2 ) );
+		myvector.add( new User( "juan5", "hola", 5 ) );
+		myvector.add( new User( "juan3", "hola", 3 ) );
+		myvector.add( new User( "juan9", "hola", 9 ) );
+		myvector.add( new User( "juan4", "hola", 4 ) );
+		
+		if(myvector.size()>5)  myvector.subList(4, 6).clear();
+		
+		System.out.println( myvector );
+		
+		for(User i : myvector) {
+			System.out.println( i.getUsername()+" "+i.getLevel() );
+		}
+		
+		
+		myvector.sort( (User us1, User us2)->  us2.getLevel()-us1.getLevel()  );
+		System.out.println( myvector );
+		
+		for(User i : myvector) {
+			System.out.println( i.getUsername()+" "+i.getLevel() );
+		}
+		*/
+		
 		
 		EventQueue.invokeLater( new Runnable() {
 			

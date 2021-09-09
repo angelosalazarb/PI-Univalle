@@ -90,8 +90,9 @@ public class GameLogic {
         this.correctWords = new ArrayList<>();
         this.wordsInPlay = new ArrayList<>();
         this.userInputWords = new ArrayList<>();
-
-        this.inputOutput = new InputOutput();        
+        
+        this.inputOutput = new InputOutput();
+        this.login = new Login(usersDataFilePath);
         this.userName = null;
         this.level = 0;
         this.round = 1;
@@ -99,7 +100,7 @@ public class GameLogic {
         this.wordListFile = wordsListFilePath;
         this.usersDataFile = usersDataFilePath;
         
-        importWords(wordsListFilePath);
+        importWords(this.wordListFile);
         
         
 	}
@@ -364,6 +365,25 @@ public class GameLogic {
 		}
     	
     	return flag;
+    }
+    
+    
+    
+    /**
+     * Determine ranking. this method return an arrayList sort in descending order with the ten users
+     *  					that have the highest level 					
+     *
+     * @return the array list
+     */
+    public ArrayList< User > determineRanking() {
+    	
+    	ArrayList< User > rankingList = login.extractUsersData( this.usersDataFile );
+    	
+    	rankingList.sort( (User u1, User u2)-> u2.getLevel()-u1.getLevel() );
+    	
+    	if( rankingList.size() > 10 ) rankingList.subList(11, rankingList.size()) ;
+    	
+    	return rankingList;
     }
     
     

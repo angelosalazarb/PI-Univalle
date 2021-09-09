@@ -1,5 +1,11 @@
 package wordsGame;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
@@ -14,14 +20,15 @@ import javax.swing.JPanel;
 
 import utilities.GokuObject;
 import utilities.LoginGUI;
+import utilities.TextFieldPanel;
 
 
 public class GUIWordGame extends JFrame {
 	
 	//private JFrame myWindow;
-	private JPanel homePanel, howToPlayPanel, gameZonePanel;
-	private JLabel jugarButton, comoJugarButton, salirButton, goBackButton;
-	private JLabel homeBackground, gameZoneBackground, howToPlayBackground;
+	private JPanel homePanel, howToPlayPanel, gameZonePanel, rankingPanel;
+	private JLabel jugarButton, comoJugarButton, salirButton, goBackButton, rankingButton;
+	private JLabel homeBackground, gameZoneBackground, howToPlayBackground, rankingBackground;
 	private Escucha escucha;
 	private Login login;
 	private LoginGUI loginGUI;
@@ -30,6 +37,7 @@ public class GUIWordGame extends JFrame {
 	private boolean flag;
 	private GokuObject goku;
 	private GameLogic gameLogic;
+	private TextFieldPanel customTextFieldPanel;
 	//private ArrayList<String> list;
 	
 	
@@ -39,10 +47,11 @@ public class GUIWordGame extends JFrame {
 		this.usersDataFilePath = usersDataFilePath;
 		this.wordsListFilePath = wordsListFilePath;
 		this.login = new Login( this.usersDataFilePath );
+		this.gameLogic = new GameLogic( usersDataFilePath, wordsListFilePath );
 		
 		this.username=null;
 		this.flag = true;
-		this.goku = new GokuObject("");
+		//this.goku = new GokuObject("");
 		
 		initGUI();
 		
@@ -104,30 +113,72 @@ public class GUIWordGame extends JFrame {
 		comoJugarButton.addMouseListener(escucha);
 		homePanel.add(comoJugarButton,0);
 		
+		//ranking buttton
+		rankingButton = new JLabel();
+		rankingButton.setSize(244,81);
+		rankingButton.setLocation(15,450);
+		rankingButton.setIcon(new ImageIcon("src/imagenes/botonRanking.png"));
+		rankingButton.setVisible(true);
+		//rankingButton.setForeground(Color.BLUE.darker());
+		//rankingButton.setFont(  new Font("SansSerif", Font.ITALIC+Font.BOLD, 45) );
+		rankingButton.addMouseListener(escucha);
+		homePanel.add(rankingButton, 0);
+		
 		//how to play panel
-		howToPlayPanel= new JPanel();				
+		Image img = new ImageIcon( getClass().getResource("/imagenes/fondocomojugar.jpg") ).getImage() ;
+		
+		howToPlayPanel= new JPanel()  {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(img, 0, 0, null);
+            }
+        };				
 		howToPlayPanel.setSize(1200,600);
 		howToPlayPanel.setLocation(0,0);
 		howToPlayPanel.setLayout(null);
 		howToPlayPanel.setVisible(false);
 		
+		/*
 		//how to play background
 		howToPlayBackground = new JLabel();
 		howToPlayBackground.setSize(1200,600);
 		howToPlayBackground.setLocation(0,0);
 		howToPlayBackground.setIcon(new ImageIcon("src/imagenes/fondocomojugar.jpg"));
 		howToPlayBackground.setVisible(true);
-		howToPlayPanel.add(howToPlayBackground,0);
+		//howToPlayPanel.add(howToPlayBackground,0);
+		*/
 		
-		//salir button in how to play screen
+		//salir button
 		salirButton = new JLabel();
 		salirButton.setSize(318,106);
 		salirButton.setLocation(110,450);
 		salirButton.setIcon(new ImageIcon("src/imagenes/botonsalir1.png"));
 		salirButton.setVisible(true);
 		salirButton.addMouseListener(escucha);
-		howToPlayPanel.add(salirButton,0);
 		
+		//ranking panel
+		rankingPanel = new JPanel();
+		rankingPanel.setSize(1200,600);
+		rankingPanel.setLocation(0,0);
+		rankingPanel.setLayout(null);
+		rankingPanel.setVisible(false);
+		
+		//ranking background
+		rankingBackground = new JLabel();
+		rankingBackground.setSize(1200,600);
+		rankingBackground.setLocation(0,0);
+		rankingBackground.setIcon(new ImageIcon("src/imagenes/homeBackground_kameHouse.jpg"));
+		rankingBackground.setVisible(true);
+		rankingPanel.add(rankingBackground,0);
+		
+		JLabel aux = new JLabel("juan1  2");
+		aux.setSize(100, 30);
+		aux.setLocation(800, 100);
+		//aux.setVisible(true);
+		aux.setForeground(Color.BLUE.darker());
+		aux.setFont(  new Font("SansSerif", Font.ITALIC+Font.BOLD, 18) );
+		//rankingPanel.add(aux,0);
 		
 		//game zone panel
 		gameZonePanel = new JPanel();				
@@ -145,7 +196,7 @@ public class GUIWordGame extends JFrame {
 		gameZonePanel.add(gameZoneBackground,0);
 		
 		//goku object
-		goku.setLocation(600,150);
+		//goku.setLocation(600,150);
 		//gameZonePanel.add(goku,0);
 	
 		//go back button
@@ -160,8 +211,32 @@ public class GUIWordGame extends JFrame {
 				
 		this.add(homePanel);
 		this.add(howToPlayPanel);
+		this.add(rankingPanel);
 		this.add(gameZonePanel);
 
+	}
+	
+	
+	public void setRankingList() {
+		
+		ArrayList<User> rankingList = gameLogic.determineRanking();
+		
+		int x=800, y=100, counter=0;
+		
+		for( User u : rankingList ) {
+			
+			JLabel temp = new JLabel( u.getUsername()+"  "+u.getLevel() );
+			temp.setSize(300, 30);
+			temp.setLocation(800, 100+(counter*50));
+			temp.setVisible(true);
+			temp.setForeground(Color.BLUE.darker());
+			temp.setFont(  new Font("SansSerif", Font.ITALIC+Font.BOLD, 18) );
+			rankingPanel.add(temp,0);
+			
+			counter++;
+		}
+		
+		
 	}
 	
 	
@@ -179,6 +254,7 @@ public class GUIWordGame extends JFrame {
 	public void gokuFlying( ArrayList<String> wordsInGame ) {
 		
 		//music.play("src/music/nubecita.wav");
+		this.goku = new GokuObject("");
 		Timer timer = new Timer();
 		TimerTask event = new TimerTask() {
 		int ctr = 0;
@@ -192,15 +268,17 @@ public class GUIWordGame extends JFrame {
 						goku.setLocation(x, 150);
 						gameZonePanel.add(goku,0);
 						x = x - 2;
-						System.out.println("X: " + x);
-						System.out.println("CTR: " + ctr);
+						//System.out.println("goku sale sin la primera letra");
+						//System.out.println("X: " + x);
+						//System.out.println("CTR: " + ctr);
 					}
 					else if(x == -200) {
 						x = 1200;
 						if(ctr<wordsInGame.size()) {
 							goku.setText(wordsInGame.get(ctr));
-							System.out.println("OUT");
-							System.out.println("CTR2: " + ctr);
+							//System.out.println("sale con letras");
+							//System.out.println("OUT");
+							//System.out.println("CTR2: " + ctr);
 							ctr ++;
 						}
 						else {
@@ -221,7 +299,7 @@ public class GUIWordGame extends JFrame {
 	
 	
 	
-	private class Escucha extends MouseAdapter {
+	private class Escucha extends MouseAdapter implements KeyListener {
 		
 		public void mouseClicked( MouseEvent eventMouse ) {
 			
@@ -257,6 +335,8 @@ public class GUIWordGame extends JFrame {
 				homePanel.setVisible(false);
 				homePanel.remove(jugarButton);
 				
+				salirButton.setLocation(110,450);
+				howToPlayPanel.add(salirButton,0);
 				jugarButton.setLocation(350,425);
 				howToPlayPanel.add(jugarButton,0);
 				howToPlayPanel.setVisible(true);
@@ -265,13 +345,32 @@ public class GUIWordGame extends JFrame {
 			}
 			else if( eventMouse.getSource() == salirButton ) {
 				
-				howToPlayPanel.setVisible(false);
-				howToPlayPanel.remove(jugarButton);
-
-				jugarButton.setLocation(850,310);
-				homePanel.add(jugarButton,0);
-				homePanel.setVisible(true);
+				if( howToPlayPanel.isVisible() ) {
+					
+					howToPlayPanel.setVisible(false);
+					howToPlayPanel.remove(jugarButton);
+					
+					jugarButton.setLocation(850,310);
+					homePanel.add(jugarButton,0);
+					homePanel.setVisible(true);
+				}
+				else if( rankingPanel.isVisible() ) {
+					
+					rankingPanel.setVisible(false);
+					homePanel.setVisible(true);
+				}
 	
+			}
+			else if( eventMouse.getSource() == rankingButton ) {
+				
+				homePanel.setVisible(false);
+				salirButton.setLocation(860,430);
+				rankingPanel.add(salirButton,0);
+				rankingPanel.setVisible(true);
+				
+				setRankingList();
+				//gameZonePanel.setVisible(true);
+				//rankingPanel.repaint();
 			}
 			else if( eventMouse.getSource() == goBackButton ) {
 				
@@ -284,6 +383,25 @@ public class GUIWordGame extends JFrame {
 			}
 			
 		}// END method mouseClicked
+
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}// END private class Escucha
 	
