@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -14,20 +16,27 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
+import org.w3c.dom.css.Rect;
+
+import utilities.DrawRect;
+import utilities.DrawWorksPanel;
 import utilities.GokuObject;
 import utilities.LoginGUI;
-import utilities.TextFieldPanel;
+
 
 
 public class GUIWordGame extends JFrame {
 	
 	//private JFrame myWindow;
 	private JPanel homePanel, howToPlayPanel, gameZonePanel, rankingPanel;
-	private JLabel jugarButton, comoJugarButton, salirButton, goBackButton, rankingButton;
+	private JLabel jugarButton, comoJugarButton, salirButton, goBackButton, rankingButton, startRound2;
 	private JLabel homeBackground, gameZoneBackground, howToPlayBackground, rankingBackground;
 	private Escucha escucha;
 	private Login login;
@@ -37,7 +46,10 @@ public class GUIWordGame extends JFrame {
 	private boolean flag;
 	private GokuObject goku;
 	private GameLogic gameLogic;
-	private TextFieldPanel customTextFieldPanel;
+	private DrawRect customTextField;
+	private DrawWorksPanel drawWorksPanel;
+	private JScrollPane scrollPane;
+	private JButton startRound2Button, startNextLevelButton;
 	//private ArrayList<String> list;
 	
 	
@@ -85,6 +97,8 @@ public class GUIWordGame extends JFrame {
 		homePanel.setLocation(0,0);
 		homePanel.setLayout(null);
 		homePanel.setVisible(true);
+		
+
 		
 		//home background
 		homeBackground = new JLabel();
@@ -172,6 +186,7 @@ public class GUIWordGame extends JFrame {
 		rankingBackground.setVisible(true);
 		rankingPanel.add(rankingBackground,0);
 		
+		/*
 		JLabel aux = new JLabel("juan1  2");
 		aux.setSize(100, 30);
 		aux.setLocation(800, 100);
@@ -179,6 +194,7 @@ public class GUIWordGame extends JFrame {
 		aux.setForeground(Color.BLUE.darker());
 		aux.setFont(  new Font("SansSerif", Font.ITALIC+Font.BOLD, 18) );
 		//rankingPanel.add(aux,0);
+		*/
 		
 		//game zone panel
 		gameZonePanel = new JPanel();				
@@ -201,18 +217,61 @@ public class GUIWordGame extends JFrame {
 	
 		//go back button
 		goBackButton = new JLabel();
-		goBackButton.setSize(150,150);
-		goBackButton.setLocation(1055,0);
+		goBackButton.setSize(75,75);
+		goBackButton.setLocation(1055,15);
 		goBackButton.setIcon(new ImageIcon("src/imagenes/klipartz.com.png"));
 		goBackButton.setVisible(true);
 		goBackButton.addMouseListener(escucha);
 		gameZonePanel.add(goBackButton,0);
-
-				
+		
+		//custom text field
+		customTextField = new DrawRect(390, 50);
+		customTextField.setSize(392,60);
+		customTextField.setLocation(50, 225);
+		customTextField.setFocusable(true);
+		customTextField.setVisible(false);
+		gameZonePanel.add(customTextField, 0);
+		
+		
+		//start second round button
+		startRound2Button = new JButton("<html>.  GO TO<br/>ROUND 2</html>");
+		startRound2Button.setSize(100, 50);
+		startRound2Button.setLocation(110, 320);
+		startRound2Button.setVisible(false);
+		startRound2Button.addActionListener(escucha);
+		gameZonePanel.add(startRound2Button,0);
+		
+		
+		startRound2 = new JLabel( "<html>.  GO TO<br/>ROUND 2</html>" );
+		startRound2.setSize(100, 50);
+		startRound2.setLocation(210, 320);
+		startRound2.setBackground(Color.BLACK);
+		startRound2.setForeground( Color.GREEN );
+		startRound2.setOpaque(true);
+		startRound2.setVisible(false);
+		startRound2.addMouseListener(escucha);
+		gameZonePanel.add(startRound2,0);
+		
+		/*
+		//scroll pane
+		scrollPane = new JScrollPane(customTextFie, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setSize(310,100);
+		scrollPane.setLocation(500, 100);
+		*/
+		
+		drawWorksPanel = new DrawWorksPanel();
+		drawWorksPanel.setSize(530,430);  //700, 340
+		drawWorksPanel.setLocation(650, 120); //480, 120
+		drawWorksPanel.setVisible(false);
+		gameZonePanel.add(drawWorksPanel, 0);
+		//drawWorksPanel.seto
+		
+		
 		this.add(homePanel);
 		this.add(howToPlayPanel);
 		this.add(rankingPanel);
 		this.add(gameZonePanel);
+		this.addKeyListener(escucha);
 
 	}
 	
@@ -237,10 +296,7 @@ public class GUIWordGame extends JFrame {
 		}
 		
 		
-	}
-	
-	
-	
+	}	
 	
 	/*
 	 * @Author: Angelo Salazar
@@ -267,24 +323,28 @@ public class GUIWordGame extends JFrame {
 					if(x > -200) {
 						goku.setLocation(x, 150);
 						gameZonePanel.add(goku,0);
-						x = x - 2;
-						//System.out.println("goku sale sin la primera letra");
+						x = x - 2;						
 						//System.out.println("X: " + x);
 						//System.out.println("CTR: " + ctr);
 					}
 					else if(x == -200) {
 						x = 1200;
 						if(ctr<wordsInGame.size()) {
-							goku.setText(wordsInGame.get(ctr));
-							//System.out.println("sale con letras");
+							goku.setText(wordsInGame.get(ctr));							
 							//System.out.println("OUT");
 							//System.out.println("CTR2: " + ctr);
 							ctr ++;
 						}
 						else {
-							loginGUI = new LoginGUI(login); 
+							 
 							System.out.println("Se acabaron las palabras");
 							timer.cancel();
+							
+							customTextField.setVisible(true);
+							drawWorksPanel.setVisible(true);
+							startRound2Button.setVisible(true);
+							startRound2.setVisible(true);
+						
 						}
 					}
 					
@@ -299,7 +359,9 @@ public class GUIWordGame extends JFrame {
 	
 	
 	
-	private class Escucha extends MouseAdapter implements KeyListener {
+	private class Escucha extends MouseAdapter implements KeyListener, ActionListener {
+
+		//private DrawRect rect =  new DrawRect(300, 50);
 		
 		public void mouseClicked( MouseEvent eventMouse ) {
 			
@@ -321,6 +383,12 @@ public class GUIWordGame extends JFrame {
 					homePanel.setVisible(false);
 					gameZonePanel.setVisible(true);
 					temp=false;
+					
+					
+					/*
+					customTextField.setVisible(true);
+					drawWorksPanel.setVisible(true);
+					startRound2Button.setVisible(true); */
 					
 					System.out.println( gameLogic.getWordsInPlay() );
 					gokuFlying( gameLogic.getWordsInPlay() );
@@ -369,8 +437,6 @@ public class GUIWordGame extends JFrame {
 				rankingPanel.setVisible(true);
 				
 				setRankingList();
-				//gameZonePanel.setVisible(true);
-				//rankingPanel.repaint();
 			}
 			else if( eventMouse.getSource() == goBackButton ) {
 				
@@ -381,25 +447,137 @@ public class GUIWordGame extends JFrame {
 
 				flag=true;
 			}
+			else if ( eventMouse.getSource() == startRound2 ) {
+				
+				System.out.println(" Iniciando segunda ronda. "); 
+				
+				gameLogic.setSecondRound();
+				drawWorksPanel.setVisible(false);
+				customTextField.setVisible(false);
+				startRound2.setVisible(false);
+				drawWorksPanel.clearPanel();
+				startRound2Button.setVisible(false);
+				
+				System.out.println( gameLogic.getWordsInPlay() );
+				
+				gokuFlying( gameLogic.getWordsInPlay() );
+			}
 			
 		}// END method mouseClicked
 
 		
 		@Override
-		public void keyTyped(KeyEvent e) {
+		public void keyTyped(KeyEvent eventKey) {
 			// TODO Auto-generated method stub
-			
+
+			//char temString = eventKey.getKeyChar();
+			//int tempint = eventKey.getExtendedKeyCode();
+			//System.out.println( "$$$$$$$$$$$$$$ "+ temString+ " #### "+ tempint);
+			if( !(eventKey.getKeyChar() == KeyEvent.VK_BACK_SPACE) ) {
+				
+				if( !(eventKey.getKeyChar() == KeyEvent.VK_ENTER) ) {
+					
+					customTextField.addCharecter( eventKey.getKeyChar() );
+				}
+				
+			}
+						
 		}
 
 		@Override
-		public void keyPressed(KeyEvent e) {
+		public void keyPressed(KeyEvent eventKey) {
 			// TODO Auto-generated method stub
 			
-		}
+			if( eventKey.getKeyCode() == KeyEvent.VK_BACK_SPACE ) {
+				customTextField.removeLastCharacter();
+			}
+			else if( eventKey.getKeyCode() == KeyEvent.VK_ENTER ) {
+				
+				System.out.println("%%%%%%%%%%%%%%%");
+				
+				String myWord =  customTextField.getWord() ;
+				myWord = myWord.toUpperCase();
+				
+				System.out.println("myWord: "+myWord);
+				
+				gameLogic.addUserInputWord(myWord);
+				
+				
+				customTextField.setWord("");
+				customTextField.repaint();
+												
+				System.out.println( gameLogic.getWordsInPlay() );
+				System.out.println( gameLogic.getCorrectWords() );
+				System.out.println( gameLogic.getBadWordsCounter() );
+				System.out.println( gameLogic.getRound() );				
+				
+				if( gameLogic.memberOfCorrectWords(myWord) ) {
+					
+					if( !gameLogic.memberOfUserInputWords(myWord) ) {
+						
+						System.out.println("se ejecuto bien");
+					}
+					else {
+						drawWorksPanel.showWordInPanel(myWord, false);						
+					}
+				}
+				else{
+					
+					drawWorksPanel.showWordInPanel(myWord, true);
+				}
+				
+				
+				if(!gameLogic.stillAlive()) {
+					
+					System.out.println("Numero maximo de fallos alcanzao, Haz muerto.");
+				}
+				else if( gameLogic.readyForSecondRound() &&  gameLogic.getRound()==1 ) {
+					
+					System.out.println("En hora buena! has acertado todas las palabras de la priemra ronda.");
+					System.out.println(" Iniciando segunda ronda. "); 
+					
+					gameLogic.setSecondRound();
+					drawWorksPanel.setVisible(false);
+					customTextField.setVisible(false);
+					drawWorksPanel.clearPanel();
+					
+					System.out.println( gameLogic.getWordsInPlay() );
+					
+					gokuFlying( gameLogic.getWordsInPlay() );
+					
+				}
+				
+			}
+			
+		}// END method ketPressed
 
 		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void actionPerformed(ActionEvent eventAction) {
+			// TODO Auto-generated method stub
+			
+			if( eventAction.getSource() == startRound2Button ) {
+				
+				System.out.println("Presionaste el boton <GO TO ROUND 2>");
+				System.out.println(" Iniciando segunda ronda. "); 
+				
+				drawWorksPanel.setVisible(false);
+				customTextField.setVisible(false);
+				startRound2Button.setVisible(false);
+				//gameZonePanel.remove( startRound2Button );
+
+				gameLogic.setSecondRound();
+				
+				System.out.println( gameLogic.getWordsInPlay() );
+				
+				gokuFlying( gameLogic.getWordsInPlay() );
+			}
 			
 		}
 		

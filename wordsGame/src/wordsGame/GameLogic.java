@@ -131,6 +131,9 @@ public class GameLogic {
     		correctWords.add(userWord);
     		wordsInPlay.remove(userWord);
     	}
+    	else if( memberOfCorrectWords(userWord) ) {
+    		System.out.println("This is a CORRECT word, you already imputed this word.");
+    	}
     	else {
     		badWordsCounter++;
     	}
@@ -211,13 +214,33 @@ public class GameLogic {
     	
     	boolean flag=false;
     	
-    	for( String i : this.correctWords ) {
-    		if( i.equals(myWord) ) {
+    	for(int i=0; i<correctWords.size(); i++ ) {
+    		if( correctWords.get(i).equals(myWord) ) {
     			flag=true;
     		}
     	}
     	
     	return flag;
+    }
+    
+    
+    /**
+     * Member of user input words.
+     *
+     * @param myWord the my word
+     * @return true, if successful
+     */
+    public boolean memberOfUserInputWords( String myWord ) {
+    	
+    	boolean flag=false;
+    	
+    	for( String i : userInputWords ) {
+    		if( i.equals(myWord) ) {
+    			flag=true;
+    		}
+    	}
+    	
+    	return flag;    	
     }
     
     

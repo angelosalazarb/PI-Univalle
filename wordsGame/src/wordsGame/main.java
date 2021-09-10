@@ -13,35 +13,7 @@ public class main {
 	public static void main(String[] args) {		
 		// TODO Auto-generated method stub
 		
-		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";
-		
-		/*
-		ArrayList<User> myvector = new ArrayList<>();
-		
-		myvector.add( new User( "juan1", "hola", 1 ) );
-		myvector.add( new User( "juan2", "hola", 2 ) );
-		myvector.add( new User( "juan5", "hola", 5 ) );
-		myvector.add( new User( "juan3", "hola", 3 ) );
-		myvector.add( new User( "juan9", "hola", 9 ) );
-		myvector.add( new User( "juan4", "hola", 4 ) );
-		
-		if(myvector.size()>5)  myvector.subList(4, 6).clear();
-		
-		System.out.println( myvector );
-		
-		for(User i : myvector) {
-			System.out.println( i.getUsername()+" "+i.getLevel() );
-		}
-		
-		
-		myvector.sort( (User us1, User us2)->  us2.getLevel()-us1.getLevel()  );
-		System.out.println( myvector );
-		
-		for(User i : myvector) {
-			System.out.println( i.getUsername()+" "+i.getLevel() );
-		}
-		*/
-		
+		String temp, path = "src/storageFiles/listWords.txt", path2 = "src/storageFiles/userData.txt";		
 		
 		EventQueue.invokeLater( new Runnable() {
 			
@@ -57,32 +29,11 @@ public class main {
 		} );
 		
 		
+		//GameLogic gameLogic = new GameLogic(path2, path, "revelo");
 		
-		//InputOutput varInputOutput = new InputOutput();
-		//User user = new User("juan", "la vaca lola", 3);
-		//Login login = new Login(path2);
-		//GameLogic gamelogic = new GameLogic( path2, path, "juan1" );
-		
-		//ConsoleView consoleView = new ConsoleView(path2, path);
-		
-		//consoleView.startGame();
-		
-		//ArrayList<Integer> myvector = new ArrayList<>();
-		//ArrayList<Integer> myvector2 = new ArrayList<>();	
+		//System.out.println( gameLogic.getWordsInPlay() );
 		
 		
-		/*
-		int num = gamelogic.determineWordsInPlay();
-		gamelogic.fillWordsInPlay();
-		
-		System.out.println( gamelogic.getUserLevel() );
-		System.out.println( gamelogic.getWordsInPlay() );
-		System.out.println( gamelogic.getImportedWords().size() );
-		System.out.println( gamelogic.getImportedWords().size() );
-		System.out.println( gamelogic.checkForMatchingWords("ALQUILER") );
-		gamelogic.addUserInputWord("ALQUILER");
-		System.out.println( gamelogic.getCorrectWords() );
-		*/
 		
 	}
 
