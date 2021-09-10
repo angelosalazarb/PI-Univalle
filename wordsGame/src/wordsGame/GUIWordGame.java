@@ -36,7 +36,7 @@ public class GUIWordGame extends JFrame {
 	
 	//private JFrame myWindow;
 	private JPanel homePanel, howToPlayPanel, gameZonePanel, rankingPanel;
-	private JLabel jugarButton, comoJugarButton, salirButton, goBackButton, rankingButton, startRound2;
+	private JLabel jugarButton, comoJugarButton, salirButton, goBackButton, rankingButton, startRound2, nextLevelButton;
 	private JLabel homeBackground, gameZoneBackground, howToPlayBackground, rankingBackground;
 	private Escucha escucha;
 	private Login login;
@@ -49,7 +49,6 @@ public class GUIWordGame extends JFrame {
 	private DrawRect customTextField;
 	private DrawWorksPanel drawWorksPanel;
 	private JScrollPane scrollPane;
-	private JButton startRound2Button, startNextLevelButton;
 	//private ArrayList<String> list;
 	
 	
@@ -233,24 +232,27 @@ public class GUIWordGame extends JFrame {
 		gameZonePanel.add(customTextField, 0);
 		
 		
-		//start second round button
-		startRound2Button = new JButton("<html>.  GO TO<br/>ROUND 2</html>");
-		startRound2Button.setSize(100, 50);
-		startRound2Button.setLocation(110, 320);
-		startRound2Button.setVisible(false);
-		startRound2Button.addActionListener(escucha);
-		gameZonePanel.add(startRound2Button,0);
-		
-		
+		//start second round button		
 		startRound2 = new JLabel( "<html>.  GO TO<br/>ROUND 2</html>" );
 		startRound2.setSize(100, 50);
-		startRound2.setLocation(210, 320);
+		startRound2.setLocation(110, 320);
 		startRound2.setBackground(Color.BLACK);
 		startRound2.setForeground( Color.GREEN );
 		startRound2.setOpaque(true);
 		startRound2.setVisible(false);
 		startRound2.addMouseListener(escucha);
 		gameZonePanel.add(startRound2,0);
+		
+		//next level button
+		nextLevelButton = new JLabel( "<html>.  GO TO<br/>NEXT LEVEL</html>" );
+		nextLevelButton.setSize(100, 50);
+		nextLevelButton.setLocation(110, 320);
+		nextLevelButton.setBackground(Color.BLACK);
+		nextLevelButton.setForeground( Color.GREEN );
+		nextLevelButton.setOpaque(true);
+		nextLevelButton.setVisible(false);
+		nextLevelButton.addMouseListener(escucha);
+		gameZonePanel.add(nextLevelButton,0);
 		
 		/*
 		//scroll pane
@@ -342,8 +344,13 @@ public class GUIWordGame extends JFrame {
 							
 							customTextField.setVisible(true);
 							drawWorksPanel.setVisible(true);
-							startRound2Button.setVisible(true);
-							startRound2.setVisible(true);
+							
+							if( gameLogic.getRound()==1 ) {
+								startRound2.setVisible(true);								
+							}
+							else{
+								nextLevelButton.setVisible(true);
+							}
 						
 						}
 					}
@@ -456,11 +463,28 @@ public class GUIWordGame extends JFrame {
 				customTextField.setVisible(false);
 				startRound2.setVisible(false);
 				drawWorksPanel.clearPanel();
-				startRound2Button.setVisible(false);
 				
 				System.out.println( gameLogic.getWordsInPlay() );
 				
 				gokuFlying( gameLogic.getWordsInPlay() );
+			}
+			else if ( eventMouse.getSource() == nextLevelButton ) {
+				
+				if( gameLogic.readyForNextLevel() ) {
+					
+					System.out.println("EXELENTE!! has ganado, vamos al siguiente nivel.");
+					
+					gameLogic.nextLevel();
+					drawWorksPanel.setVisible(false);
+					customTextField.setVisible(false);
+					nextLevelButton.setVisible(false);
+					drawWorksPanel.clearPanel();
+					
+					System.out.println( gameLogic.getWordsInPlay() );
+					
+					gokuFlying( gameLogic.getWordsInPlay() );
+				}
+				
 			}
 			
 		}// END method mouseClicked
@@ -539,7 +563,9 @@ public class GUIWordGame extends JFrame {
 					gameLogic.setSecondRound();
 					drawWorksPanel.setVisible(false);
 					customTextField.setVisible(false);
+					startRound2.setVisible(false);
 					drawWorksPanel.clearPanel();
+					
 					
 					System.out.println( gameLogic.getWordsInPlay() );
 					
@@ -562,6 +588,7 @@ public class GUIWordGame extends JFrame {
 		public void actionPerformed(ActionEvent eventAction) {
 			// TODO Auto-generated method stub
 			
+			/*
 			if( eventAction.getSource() == startRound2Button ) {
 				
 				System.out.println("Presionaste el boton <GO TO ROUND 2>");
@@ -577,7 +604,7 @@ public class GUIWordGame extends JFrame {
 				System.out.println( gameLogic.getWordsInPlay() );
 				
 				gokuFlying( gameLogic.getWordsInPlay() );
-			}
+			}*/
 			
 		}
 		
