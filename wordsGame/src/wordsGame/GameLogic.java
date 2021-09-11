@@ -273,6 +273,23 @@ public class GameLogic {
     
     
     /**
+     * Restart.
+     */
+    public void restart() {
+    	
+    	badWordsCounter=0;
+    	importedWords.addAll( correctWords );
+    	importedWords.addAll(wordsInPlay);
+    	
+    	round=1;
+    	correctWords.clear();
+    	wordsInPlay.clear();
+    	userInputWords.clear();
+    	fillWordsInPlay();
+    }
+    
+    
+    /**
      * Still alive. checks if the user has NOT reach the maximum number of errors for it's corresponding level
      *
      * @return true, if successful

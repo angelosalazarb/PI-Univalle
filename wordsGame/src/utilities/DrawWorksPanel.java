@@ -1,3 +1,7 @@
+/*
+ * Author: JUAN JOSE BAILON
+ * e-mail: juan.bailon@correounivalle.edu.co
+ */
 package utilities;
 
 import java.awt.Color;
@@ -9,10 +13,19 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DrawWorksPanel.this class is the JPanel in witch the words inputed by the palyer
+ * 							are gonna be draw
+ */
 public class DrawWorksPanel extends JPanel {
 
-	ArrayList< HashMap<String, String> > wordsList;
+	/** The words list. */
+    private	ArrayList< HashMap<String, String> > wordsList;
 	
+	/**
+	 * Instantiates a new draw works panel.
+	 */
 	public DrawWorksPanel() {
 		setOpaque(false);
 		//setBackground(Color.ORANGE);
@@ -20,6 +33,12 @@ public class DrawWorksPanel extends JPanel {
 	}
 	
 	
+	/**
+	 * Show word in panel.
+	 *
+	 * @param userWord the user word
+	 * @param isWrong the is wrong
+	 */
 	public void showWordInPanel(String userWord, boolean isWrong ) {
 		
 		HashMap<String, String> newWord = new HashMap<String, String>();
@@ -31,6 +50,9 @@ public class DrawWorksPanel extends JPanel {
 		repaint();
 	}
 	
+	/**
+	 * Clear panel.
+	 */
 	public void clearPanel() {
 		
 		wordsList.clear();
@@ -38,6 +60,11 @@ public class DrawWorksPanel extends JPanel {
 	}
 	
 	
+	/**
+	 * Paint component.
+	 *
+	 * @param g the g
+	 */
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
@@ -73,15 +100,7 @@ public class DrawWorksPanel extends JPanel {
 			
 		}
 		
-		/*
-		g.setColor( Color.GREEN );
-		g.drawString("RASCACIELOS", 0, 22);
-		g.drawString("ADOLESCENTE", 170, 22);
-		g.drawString("RASCACIELOS", 340, 22);
 		
-		g.setColor( Color.RED );
-		g.drawString("ADOLESCENTE", 0, 22+22+10);
-		*/
 	}
 	
 	

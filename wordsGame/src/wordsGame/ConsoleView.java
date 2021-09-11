@@ -38,21 +38,17 @@ public class ConsoleView {
 			gameLogic = new GameLogic(usersDataFilePath, wordListFilePath, tempUsername);			
 			gameLogic.fillWordsInPlay();			
 		}
-		//if( gameLogic.getWordsInPlay().isEmpty() ) {
-		//}
 
 		System.out.println("Estas son las palabras en juego: ");
-		//System.out.println( gameLogic.getUserLevel() );
-		//System.out.println( gameLogic.getUserName() );
 		System.out.print( gameLogic.getWordsInPlay() );
-		System.out.print( "     NIVEL= "+ gameLogic.getUserLevel()  /*+" \n" */ );
+		System.out.print( "     NIVEL= "+ gameLogic.getUserLevel() );
 		System.out.print( "   IMPORTEDSIZE= "+ gameLogic.getImportedWords().size()  );
 		System.out.print( "   inplaySIZE= "+ gameLogic.getWordsInPlay().size() + " \n" );
 		System.out.println();
 		System.out.println("Ahora Ingrese una por una las palabras que estan en juego.");
 		System.out.println("Si desea dejar de ingresar palabras ingrese la palabra stop/STOP");
 		
-		boolean flag=true;
+		
 		
 		while (true) {
 			
@@ -85,12 +81,8 @@ public class ConsoleView {
 			else if( gameLogic.readyForSecondRound() &&  gameLogic.getRound()==1 ) {
 				
 				System.out.println("En hora buena! has acertado todas las palabras de la priemra ronda.");
-				System.out.println(" Iniciando segunda ronda. ");  /*
-				System.out.println( gameLogic.getUserLevel() );
-				System.out.println(gameLogic.getWordsInPlay().size()==(gameLogic.getUserLevel()+1)*2 );
-				System.out.println( (gameLogic.getUserLevel()+1) *4 );
-				System.out.println(gameLogic.getWordsInPlay().size() ); 
-				(gameLogic.getWordsInPlay().size()==((gameLogic.getUserLevel()+1)*4) ) */
+				System.out.println(" Iniciando segunda ronda. ");  
+				
 				gameLogic.setSecondRound();
 				playCorrspondingLevel();				
 				break;
@@ -137,7 +129,7 @@ public class ConsoleView {
 							System.out.println("EXELENTE!! has ganado, vamos al siguiente nivel.");
 							gameLogic.nextLevel();
 							playCorrspondingLevel();
-							//System.out.println("");
+		
 							break;
 							
 						}else {
@@ -159,7 +151,6 @@ public class ConsoleView {
 			
 		}
 		
-		//gameLogic.getImportedWords();
 	}
 	
 	

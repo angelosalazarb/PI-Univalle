@@ -1,3 +1,7 @@
+/*
+ * Autor: JUAN JOSE BAILON	
+ * e-mail: juan.bailon@correounivalle.edu.co
+ */
 package utilities;
 
 import java.awt.Color;
@@ -5,31 +9,45 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DrawRect. draws a rectangle that is gonna be use as a text field
+ */
 public class DrawRect extends JPanel {
 	
-	int x, y, width, height, arcRadius, arcHeight, radius;
-	String word;
+	private int  width, height;
+	private String word;
 	
 	
+	/**
+	 * Instantiates a new draw rect.
+	 *
+	 * @param width the width
+	 * @param height the height
+	 */
 	public DrawRect(int width, int height) {
-		
-		//this.x = x;
-		//this.y = y;
+	
 		this.word="";
 		this.width = width;
 		this.height = height;
 		this.setOpaque(false);
-		//this.setFocusable(true);
 	}
 	
+	/**
+	 * Adds the charecter.
+	 *
+	 * @param userChar the user char
+	 */
 	public void addCharecter(char userChar) {
-		//String temp = this.word+ String.valueOf(userChar) ;
+		
 		this.word += String.valueOf(userChar);
 		repaint();
 	}
 	
+	/**
+	 * Removes the last character.
+	 */
 	public void removeLastCharacter() {
 		
 		if( this.word.length()>0 ) {
@@ -38,10 +56,18 @@ public class DrawRect extends JPanel {
 		}
 	}
 	
+	/**
+	 * Paint part.
+	 */
 	public void paintPart() {
 		repaint();
 	}
 	
+	/**
+	 * Paint component.
+	 *
+	 * @param g the g
+	 */
 	public void paintComponent(Graphics g) {
 		
         g.setColor( Color.BLACK );
@@ -57,10 +83,20 @@ public class DrawRect extends JPanel {
 	}
 
 	
+	/**
+	 * Gets the word.
+	 *
+	 * @return the word
+	 */
 	public String getWord() {
 		return word;
 	}
 
+	/**
+	 * Sets the word.
+	 *
+	 * @param word the new word
+	 */
 	public void setWord(String word) {
 		this.word = word;
 	}
