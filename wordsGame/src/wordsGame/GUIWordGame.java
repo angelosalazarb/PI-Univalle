@@ -62,7 +62,7 @@ public class GUIWordGame extends JFrame {
 	private JLabel currentLevel, restartButton, gameOver;
 	private Timer timer;
 	private TimerTask timerTask;
-	private JLabel angelo, angeloText, clickme;
+	private JLabel angelo, angeloText, clickme, messageLabel;
 	private int angeloCounter=0;
 	
 	
@@ -275,6 +275,14 @@ public class GUIWordGame extends JFrame {
 		customTextField.setVisible(false);
 		gameZonePanel.add(customTextField, 0);
 		
+		//meassage label
+		messageLabel = new JLabel("<html>You DONT have enough correct words<br/> to go to the next level</html>");
+		messageLabel.setSize(350, 35);
+		messageLabel.setLocation(55,185);
+		messageLabel.setForeground(Color.GREEN);
+		messageLabel.setFont( new Font("DialogInput", Font.BOLD, 15) );
+		messageLabel.setVisible(false);
+		gameZonePanel.add(messageLabel,0);
 		
 		//start second round button
 		startRound2 = new JLabel( "<html><pre>    GO TO<br/>   ROUND 2</pre></html>" );
@@ -316,6 +324,7 @@ public class GUIWordGame extends JFrame {
 		drawWorksPanel.setVisible(false);
 		gameZonePanel.add(drawWorksPanel, 0);
 		
+		
 		//game over label
 		gameOver = new JLabel("  GAME OVER");
 		gameOver.setSize(500, 150);
@@ -354,12 +363,12 @@ public class GUIWordGame extends JFrame {
 		
 		for( User u : rankingList ) {
 			
-			JLabel temp = new JLabel( u.getUsername()+"  "+u.getLevel() );
-			temp.setSize(300, 30);
-			temp.setLocation(800, 100+(counter*50));
+			JLabel temp = new JLabel( u.getUsername()+"  ............. Level: "+u.getLevel() );
+			temp.setSize(500, 30);
+			temp.setLocation(350, 30+(counter*50));
 			temp.setVisible(true);
-			temp.setForeground(Color.BLUE.darker());
-			temp.setFont(  new Font("SansSerif", Font.ITALIC+Font.BOLD, 18) );
+			temp.setForeground(Color.GREEN.brighter());
+			temp.setFont(  new Font("SansSerif", Font.ITALIC+Font.BOLD, 22) );
 			rankingPanel.add(temp,0);
 			
 			counter++;
@@ -510,6 +519,14 @@ public class GUIWordGame extends JFrame {
 				timer.cancel();
 				gameZonePanel.remove(goku);
 				
+				messageLabel.setVisible(false);
+				startRound2.setVisible(false);
+				nextLevelButton.setVisible(false);
+				drawWorksPanel.setVisible(false);
+				customTextField.setVisible(false);
+				gameOver.setVisible(false);
+				drawWorksPanel.clearPanel();
+				
 				gameZonePanel.setVisible(false);
 				homePanel.setVisible(true);
 				jugarButton.setLocation(850,310);
@@ -539,6 +556,7 @@ public class GUIWordGame extends JFrame {
 					System.out.println("EXELENTE!! has ganado, vamos al siguiente nivel.");
 					
 					gameLogic.nextLevel();
+					messageLabel.setVisible(false);
 					drawWorksPanel.setVisible(false);
 					customTextField.setVisible(false);
 					nextLevelButton.setVisible(false);
@@ -549,6 +567,9 @@ public class GUIWordGame extends JFrame {
 					
 					gokuFlying( gameLogic.getWordsInPlay() );
 				}
+				else {
+					messageLabel.setVisible(true);
+				}
 				
 			}
 			else if( eventMouse.getSource() == restartButton ) {
@@ -558,6 +579,7 @@ public class GUIWordGame extends JFrame {
 				
 				gameZonePanel.remove(goku);
 				
+				messageLabel.setVisible(false);
 				startRound2.setVisible(false);
 				nextLevelButton.setVisible(false);
 				drawWorksPanel.setVisible(false);
@@ -577,8 +599,7 @@ public class GUIWordGame extends JFrame {
 				switch (angeloCounter) {
 				case 0:
 					angelo.setIcon( new ImageIcon( "src/imagenes/angelo1.png" ) );
-					angeloText.setText("<html>Hola!<br/>Soy Angelo y no hice un culo</html>" );
-					clickme.setText("Do NOT click me again");
+					angeloText.setText("<html>Why did you click me!<br/>Do it again, I DARE YOU</html>" );
 					angeloCounter++;
 					break;
 				case 1:	
